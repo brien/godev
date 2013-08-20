@@ -85,7 +85,7 @@ namespace MainForm
             AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Products");
             AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Orders");
             AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Change Over");
-            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text,"Change Over Penalties");
+            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Change Over Penalties");
             AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "BOMItems");
             AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Inventory");
 
