@@ -78,26 +78,21 @@ namespace MainForm
             // The next section of code loads worksheets into multiple data tables within a single data set
             // The dataset is then passed to the scheduler via the GAS.Masterdata Property.
             // Create a master data set with line, product, changeover, and order data in it.
-            DataSet ds;
             DataSet ds2 = new DataSet();
 
             // Add the Production Line Master Data
-            AddExcelTableToMasterData(ref ds2, "Resources");
-            AddExcelTableToMasterData(ref ds2, "Products");
-            AddExcelTableToMasterData(ref ds2, "Orders");
-            AddExcelTableToMasterData(ref ds2, "Change Over");
-            AddExcelTableToMasterData(ref ds2, "Change Over Penalties");
-            AddExcelTableToMasterData(ref ds2, "BOMItems");
-            AddExcelTableToMasterData(ref ds2, "Inventory");
+            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Resources");
+            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Products");
+            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Orders");
+            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Change Over");
+            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text,"Change Over Penalties");
+            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "BOMItems");
+            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Inventory");
 
             if (this.GAS.seededRun)
             {
                 // Add the pre-existing schedule
-                DataTable dt;
-                ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbStartingScheduleName.Text, "Raw Genome");
-                dt = ds.Tables[0];
-                ds.Tables.Remove(dt);
-                ds2.Tables.Add(dt);
+                AddExcelTableToMasterData(ref ds2, tbStartingScheduleName.Text, "Raw Genome");
             }
 
             // Send the complete dataset to the scheduler
@@ -165,10 +160,10 @@ namespace MainForm
             dgvSchedule.AutoResizeColumn(4, DataGridViewAutoSizeColumnMode.AllCells);
             dgvSchedule.AutoSize = true;
         }
-        private void AddExcelTableToMasterData(ref DataSet ds2, string sheetName)
+        private void AddExcelTableToMasterData(ref DataSet ds2, string bookName, string sheetName)
         {
             DataSet ds = new DataSet();
-            ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbWorkBookName.Text, sheetName);
+            ds = Junction.ExcelAutomation.GetDataSetFromExcel(bookName, sheetName);
             DataTable dt = ds.Tables[0];
             ds.Tables.Remove(dt);
             ds2.Tables.Add(dt);
