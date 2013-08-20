@@ -103,7 +103,6 @@ namespace Junction
 
         public static bool[] ConstrainedStart { get; set; }
 
-        public GeneticOptimizer.SimpleGA GA;
         public GeneticOptimizer.GA CGA;
         private int[] Genes;
         private double[] Times;
