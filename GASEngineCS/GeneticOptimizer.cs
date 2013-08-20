@@ -222,8 +222,8 @@ namespace Junction
             {
                 public Func<int[], double[], double> FitnessFunction { get; set; }
                 GA _reftoGO;
-                public double Fitness { get { return _fitness; } }
-                private double _fitness;
+                // public double Fitness { get { return _fitness; } }
+                // private double _fitness;
                 private int _i;
                 private ManualResetEvent _doneEvent;
                 public FitnessEvaluationThread(int i, GA reftoGO, ManualResetEvent doneEvent)
