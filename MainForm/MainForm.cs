@@ -82,10 +82,14 @@ namespace MainForm
             DataSet ds2 = new DataSet();
 
             // Add the Production Line Master Data
+            /*
             ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbWorkBookName.Text, "Resources");
             DataTable dt = ds.Tables[0];
             ds.Tables.Remove(dt);
             ds2.Tables.Add(dt);
+            */
+            DataTable dt;
+            AddExcelTableToMasterData(ref ds2, "Resources"); 
 
 
             // Add the Product Spreadsheet.
@@ -199,7 +203,14 @@ namespace MainForm
             dgvSchedule.AutoResizeColumn(4, DataGridViewAutoSizeColumnMode.AllCells);
             dgvSchedule.AutoSize = true;
         }
-
+        private void AddExcelTableToMasterData(ref DataSet ds2, string sheetName)
+        {
+            DataSet ds = new DataSet();
+            ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbWorkBookName.Text, sheetName);
+            DataTable dt = ds.Tables[0];
+            ds.Tables.Remove(dt);
+            ds2.Tables.Add(dt);
+        }
         private void btnSelectSpreadSheet_Click(object sender, EventArgs e)
         {
             String DefaultDir = Application.StartupPath;
