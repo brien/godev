@@ -1,0 +1,13 @@
+C:\Users\bsmithmartinez\work\godev\MainForm\bin\Debug\MainForm.exe.config
+C:\Users\bsmithmartinez\work\godev\MainForm\bin\Debug\MainForm.exe
+C:\Users\bsmithmartinez\work\godev\MainForm\bin\Debug\MainForm.pdb
+C:\Users\bsmithmartinez\work\godev\MainForm\bin\Debug\ExcelAutomation.dll
+C:\Users\bsmithmartinez\work\godev\MainForm\bin\Debug\GASEngineCS.dll
+C:\Users\bsmithmartinez\work\godev\MainForm\bin\Debug\ExcelAutomation.pdb
+C:\Users\bsmithmartinez\work\godev\MainForm\bin\Debug\GASEngineCS.pdb
+C:\Users\bsmithmartinez\work\godev\MainForm\obj\Debug\MainForm.csprojResolveAssemblyReference.cache
+C:\Users\bsmithmartinez\work\godev\MainForm\obj\Debug\MainForm.MainForm.resources
+C:\Users\bsmithmartinez\work\godev\MainForm\obj\Debug\MainForm.Properties.Resources.resources
+C:\Users\bsmithmartinez\work\godev\MainForm\obj\Debug\MainForm.csproj.GenerateResource.Cache
+C:\Users\bsmithmartinez\work\godev\MainForm\obj\Debug\MainForm.exe
+C:\Users\bsmithmartinez\work\godev\MainForm\obj\Debug\MainForm.pdb
