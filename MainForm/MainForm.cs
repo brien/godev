@@ -82,61 +82,23 @@ namespace MainForm
             DataSet ds2 = new DataSet();
 
             // Add the Production Line Master Data
-            /*
-            ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbWorkBookName.Text, "Resources");
-            DataTable dt = ds.Tables[0];
-            ds.Tables.Remove(dt);
-            ds2.Tables.Add(dt);
-            */
-            DataTable dt;
-            AddExcelTableToMasterData(ref ds2, "Resources"); 
-
-
-            // Add the Product Spreadsheet.
-            ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbWorkBookName.Text, "Products");
-            dt = ds.Tables[0];
-            ds.Tables.Remove(dt);
-            ds2.Tables.Add(dt);
-
-            // Add the orders data set
-            ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbWorkBookName.Text, "Orders");
-            dt = ds.Tables[0];
-            ds.Tables.Remove(dt);
-            ds2.Tables.Add(dt);
-
-            // Add the Changeover time. Time of changing (From, To) products
-            ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbWorkBookName.Text, "Change Over");
-            dt = ds.Tables[0];
-            ds.Tables.Remove(dt);
-            ds2.Tables.Add(dt);
-
-            // Add the Changeover Penalty. Penalty (not time) of changing (From, To) products
-            ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbWorkBookName.Text, "Change Over Penalties");
-            dt = ds.Tables[0];
-            ds.Tables.Remove(dt);
-            ds2.Tables.Add(dt);
-
-            // Add the BOM Items
-            ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbWorkBookName.Text, "BOMItems");
-            dt = ds.Tables[0];
-            ds.Tables.Remove(dt);
-            ds2.Tables.Add(dt);
-
-            // Add the pre-existing inventory
-            ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbWorkBookName.Text, "Inventory");
-            dt = ds.Tables[0];
-            ds.Tables.Remove(dt);
-            ds2.Tables.Add(dt);
+            AddExcelTableToMasterData(ref ds2, "Resources");
+            AddExcelTableToMasterData(ref ds2, "Products");
+            AddExcelTableToMasterData(ref ds2, "Orders");
+            AddExcelTableToMasterData(ref ds2, "Change Over");
+            AddExcelTableToMasterData(ref ds2, "Change Over Penalties");
+            AddExcelTableToMasterData(ref ds2, "BOMItems");
+            AddExcelTableToMasterData(ref ds2, "Inventory");
 
             if (this.GAS.seededRun)
             {
                 // Add the pre-existing schedule
+                DataTable dt;
                 ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbStartingScheduleName.Text, "Raw Genome");
                 dt = ds.Tables[0];
                 ds.Tables.Remove(dt);
                 ds2.Tables.Add(dt);
             }
-
 
             // Send the complete dataset to the scheduler
             this.GAS.MasterData = ds2;
