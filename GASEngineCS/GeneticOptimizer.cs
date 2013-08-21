@@ -100,26 +100,17 @@ namespace Junction
                 {
                     population[i] = new ScheduleGenome(length, tl, modes, mutationRate, _delayRate, _delayMean);
                     population[i].realCrossover = realCrossover;
-                    //population[i].maxModes = length / tl - 1;
                 }
                 for (int i = 0; i < offsize; i++)
                 {
                     offspring[i] = new ScheduleGenome(length, tl, modes, mutationRate, _delayRate, _delayMean);
                     offspring[i].realCrossover = realCrossover;
-                    //offspring[i].maxModes = length / tl - 1;
                 }
 
             }
             public void SeedPopulation(int[] genes, double[] times)
             {
                 population[0] = new ScheduleGenome(_length, _tl, _mModes, _mutationRate, genes, times);
-                /*
-                for (int i = 1; i < _popsize; i++)
-                {
-                    population[i] = new ConstrainedCreature(_length, _length, genes, times);
-                    Mutate(i);
-                }
-                 */
             }
             public double AverageFitness()
             {
@@ -177,20 +168,15 @@ namespace Junction
                     int p2 = SelectParent();
 
                     // Crossover to create two offspring
-                    //Crossover(p1, p2, i, i + 1);
                     population[p1].Crossover(ref population[p2], ref offspring[i]);
                     population[p2].Crossover(ref population[p1], ref offspring[i + 1]);
 
                     // Mutation chance
-                    // Mutate(i);
                     offspring[i].Mutate();
                     Debug.Assert(offspring[i].IsValid(), "Invalid mutation");
-                    //Mutate(i + 1);
                     offspring[i + 1].Mutate();
                     Debug.Assert(offspring[i + 1].IsValid(), "Invalid mutation");
 
-                    //offspring[i].fitness = FitnessFunction(offspring[i].Genes, offspring[i].Times);
-                    //offspring[i + 1].fitness = FitnessFunction(offspring[i + 1].Genes, offspring[i + 1].Times);
                 }
                 int threadcount = 20;
                 int ck = 0;
@@ -351,117 +337,6 @@ namespace Junction
                 }
                 */
 
-            }
-
-            public void DTCrossover(int p1, int p2, int o1, int o2)
-            {
-                switch (realCrossover)
-                {
-                    case RealCrossoverOp.MeanWithNoise:
-                        // Mean-with-noise Crossover:
-                        for (int i = 0; i < population[p1]._timesLength; i++)
-                        {
-                            double mean = population[p1].Times[i] + population[p2].Times[i];
-                            mean = mean / 2.0;
-                            offspring[o1].Times[i] = SimpleRNG.GetNormal(mean, 0.5);
-                            offspring[o2].Times[i] = SimpleRNG.GetNormal(mean, 0.5);
-                            if (offspring[o1].Times[i] < 0.0)
-                            {
-                                offspring[o1].Times[i] = 0.0;
-                            }
-                            if (offspring[o2].Times[i] < 0.0)
-                            {
-                                offspring[o2].Times[i] = 0.0;
-                            }
-                        }
-                        break;
-                    case RealCrossoverOp.Uniform:
-                        // Uniform Crossover:
-                        int cutpoint = _rand.Next(population[p1]._timesLength + 1);
-                        for (int i = 0; i < cutpoint; i++)
-                        {
-                            offspring[o1].Times[i] = population[p1].Times[i];
-                            offspring[o2].Times[i] = population[p2].Times[i];
-                        }
-                        for (int i = cutpoint; i < population[p1]._timesLength; i++)
-                        {
-                            offspring[o1].Times[i] = population[p2].Times[i];
-                            offspring[o2].Times[i] = population[p1].Times[i];
-                        }
-                        break;
-                }
-            }
-
-            public void Crossover(int p1, int p2, int o1, int o2)
-            {
-                int cutpoint = _rand.Next(_length);
-
-                //Debug.Write(Environment.NewLine + "Distance between " + p1 + " - " + p2 + ": " + population[p1].Distance(population[p2]));
-
-                for (int i = 0; i < _length; i++)
-                {
-                    offspring[o1].Genes[i] = population[p1].Genes[i];
-                }
-                for (int i = 0; i < _length; i++)
-                {
-                    offspring[o2].Genes[i] = population[p2].Genes[i];
-                }
-
-                Debug.Assert(offspring[o1].IsValid(), "Invalid creature before crossover");
-                Debug.Assert(offspring[o2].IsValid(), "Invalid creature before crossover");
-
-                List<int> remainder = new List<int>(population[p2].Genes);
-                //remainder = population[p2].Genes;
-                for (int i = 0; i < cutpoint; i++)
-                {
-                    remainder.Remove(population[p1].Genes[i]);
-                }
-                for (int i = cutpoint; i < _length; i++)
-                {
-                    offspring[o1].Genes[i] = remainder[i - cutpoint];
-                }
-
-                Debug.Assert(offspring[o1].IsValid(), "Invalid creature after crossover");
-
-                // Repeat for offspring 2
-                remainder = new List<int>(population[p1].Genes);
-                for (int i = cutpoint; i < _length; i++)
-                {
-                    remainder.Remove(population[p2].Genes[i]);
-                }
-
-                for (int i = 0; i < cutpoint; i++)
-                {
-                    offspring[o2].Genes[i] = remainder[i];
-                }
-                Debug.Assert(offspring[o2].IsValid(), "Invalid creature after crossover");
-
-                DTCrossover(p1, p2, o1, o2);
-            }
-
-            public void Mutate(int o)
-            {
-                for (int i = 0; i < _length; i++)
-                {
-                    if (_rand.NextDouble() < _mutationRate)
-                    {
-                        int r = _rand.Next(_length);
-                        int temp = offspring[o].Genes[i];
-                        offspring[o].Genes[i] = offspring[o].Genes[r];
-                        offspring[o].Genes[r] = temp;
-                        // Mutate the delay time
-                        r = _rand.Next(offspring[o]._timesLength);
-                        double mutatedDelay = 0;
-                        //mutatedDelay = SimpleRNG.GetExponential(_delayMean);
-                        mutatedDelay = SimpleRNG.GetNormal(offspring[o].Times[r], 1.0);
-                        //mutatedDelay = _rand.NextDouble() * _delayMean;
-                        if (mutatedDelay < 0.0)
-                        {
-                            mutatedDelay = 0.0;
-                        }
-                        offspring[o].Times[r] = mutatedDelay;
-                    }
-                }
             }
 
             public class ScheduleGenome
