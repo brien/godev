@@ -11,9 +11,10 @@ namespace Junction
 {
     public sealed class GeneticAlgorithmSchedulingCS
     {
-        private const double UNCONSTRAINED_TIME = 999999; // An arbitrary amount of time to add in decimal hours to create an unconstrained condition
+        // An arbitrary amount of time to add in decimal hours to create an unconstrained condition
+        private const double UNCONSTRAINED_TIME = 999999;
 
-        //Create a bit flag enumeration for allergens
+        // Create a bit flag enumeration for allergens
         [Flags]
         public enum Allergens
         {
@@ -51,7 +52,8 @@ namespace Junction
         //private double[] ProdRunTime;
         private static double[] JobRunTime;
         private String[] ProductName;
-        private static int[] BOMItemIndex; //Used to hold the index from the product to the BOMItem list
+        // Used to hold the index from the product to the BOMItem list
+        private static int[] BOMItemIndex; 
         private System.Collections.Hashtable ProductNumberHash;
         private string[] AllergensInProduct;
         private static double[,] ChangeOver;
@@ -61,8 +63,10 @@ namespace Junction
         private object[,] ScheduleResult;
         private int[,] Offspring;
         private int[,] Population;
-        private static double[] Priority; //The due time in decimal hours
-        private static double[] EarlyStart; //Earliest start time in decimal hours
+        // The due time in decimal hours
+        private static double[] Priority;
+        // Earliest start time in decimal hours
+        private static double[] EarlyStart; 
         private double[] FitnessArray;
         private DateTime[] productionEndTime;
         private String[] ResourceName;
@@ -70,9 +74,12 @@ namespace Junction
         private DateTime[] productionStartTime;
         private static double[] ProdStartTime;
         private static int[] StartProduct;
-        private static double[] RLCMin; //Minimum Resource Late Cost
-        private static double[] RLCMax; //Maximum Resource Late Cost
-        private static double[] RLCRatePerHour; //increase in late cost for each hour late
+        // Minimum Resource Late Cost
+        private static double[] RLCMin; 
+        // Maximum Resource Late Cost
+        private static double[] RLCMax; 
+        // Increase in late cost for each hour late
+        private static double[] RLCRatePerHour; 
         private static double[] MinLateCost;
         private static double[] MaxLateCost;
         private static double[] LateCostPerHour;
@@ -1192,7 +1199,6 @@ namespace Junction
             {
                 throw new ApplicationException("Order Data Set cannot be initialized. The Resources Data Table must be initialized first.\r\n");
             }
-            // If we want to generate delay jobs on the fly instead of reading them from the input spreadsheet
             // Note: "NumberOfRealJobs" is misleading.
             // It is the number of actual orders with real products + number of delay jobs, whether they are generated or in the input spreadsheet. 
             int SlackJobs, TotalJobs;
