@@ -34,10 +34,6 @@ namespace Junction
 
         char[] AllergenList = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I' };
 
-        // Run the refactored GA or the original Nestle Demo?
-        public bool runRefactored;
-        // Or Run the new GA (originally called constrained, no longer accurate description)?
-        public bool runConstrained;
         // The mean of the delay times:
         public double meanDelayTime;
         // The rate at which delay times are generated (probablilty of non-zero delay time)
