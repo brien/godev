@@ -728,8 +728,6 @@ namespace Junction
             }
 
             int NumJobs = JobsToSchedule.GetUpperBound(0) + 1;
-            Offspring = new int[PopulationSize, NumJobs];
-            Population = new int[PopulationSize, NumJobs];
             ScheduleResult = new object[7, NumJobs];
             FitnessArray = new double[PopulationSize];
             //bool Stopped = false; //Allow for interruption of a scheduling run
