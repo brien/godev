@@ -146,7 +146,7 @@ namespace Junction
                 elite.fitness = FitnessFunction(elite.Genes, elite.Times, elite.Modes);
                 for (int i = 0; i < _popsize; i++)
                 {
-                    population[i].fitness = FitnessFunction(population[i].Genes, population[i].Times, elite.Modes);
+                    population[i].fitness = FitnessFunction(population[i].Genes, population[i].Times, population[i].Modes);
                     if (population[i].fitness > elite.fitness)
                     {
                         elite.Copy(population[i]);
