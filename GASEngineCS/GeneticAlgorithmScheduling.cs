@@ -61,8 +61,6 @@ namespace Junction
         private static int[] JobsToSchedule;
         private static double[] OrderQty;
         private object[,] ScheduleResult;
-        private int[,] Offspring;
-        private int[,] Population;
         // The due time in decimal hours
         private static double[] Priority;
         // Earliest start time in decimal hours
@@ -1328,23 +1326,7 @@ namespace Junction
                 output[modes[i] * NumberOfRealJobs + used[modes[i]]] = i;
                 used[modes[i]]++;
             }
-            /*
-            for (int i = 0; i < NumberOfResources; i++)
-            {
-                for (int j = 0; j < NumberOfRealJobs; j++)
-                {
-                    if (modes[j] == i)
-                    {
-                        for (int k = 0; k < NumberOfRealJobs; k++)
-                        {
-                            if (genes[k] == j)
-                            {
-                                output[i * NumberOfResources + k] = j;
-                            }
-                        }
-                    }
-                }
-            }*/
+
         }
         private static double CalcFitness(int[] genes, double[] delayTimes, int[] modes)
         {
