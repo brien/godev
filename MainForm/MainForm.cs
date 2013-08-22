@@ -204,5 +204,24 @@ namespace MainForm
         {
             Junction.ExcelAutomation.CreateResultsWorksheet(GAS.ScheduleDataSet, GAS.GAResult);
         }
+
+        private void btnSelectStartingSchedule_Click(object sender, EventArgs e)
+        {
+            string defaultDir = Application.StartupPath;
+            openFileDialog1.InitialDirectory = defaultDir;
+            openFileDialog1.FileName = "TestImport.xlsx";
+            openFileDialog1.Filter = "Excel 2007 Workbooks (*.xlsx)|*.xlsx|Excel 98-2005 Workbooks (*.xls)|*.xls";
+            openFileDialog1.CheckFileExists = true;
+            openFileDialog1.ShowReadOnly = true;
+            if( openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                tbStartingScheduleName.Text = openFileDialog1.FileName;
+            }
+            else
+            {
+                MessageBox.Show("Error Selecting File");
+            }
+            GAS.seededRun = true;
+        }
     }
 }
