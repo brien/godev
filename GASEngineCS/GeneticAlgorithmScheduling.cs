@@ -682,9 +682,9 @@ namespace Junction
             ScheduleDataSet = new DataSet();
             //Add the new DataTable to the dataset
             ScheduleDataSet.Tables.Add(dt);
-            SaveRawElite(genes, delayTimes);
+            SaveRawElite(genes, delayTimes, modes);
         }
-        public void SaveRawElite(int[] genes, double[] delayTimes)
+        public void SaveRawElite(int[] genes, double[] delayTimes, int[] modes)
         {
             GAResult = new DataSet();
 
@@ -701,14 +701,23 @@ namespace Junction
             timeCol.ColumnName = "DelayTime";
             dt2.Columns.Add(timeCol);
 
+            DataColumn modeCol = new DataColumn();
+            modeCol.DataType = Type.GetType("System.Double");
+            modeCol.ColumnName = "Mode";
+            dt2.Columns.Add(modeCol);
+
+            // This is no longer well-written. All vectors are the same length now.
             for (int i = 0; i < genes.Length; i++)
             {
-
                 DataRow dr2 = dt2.NewRow();
                 dr2["Genes"] = genes[i];
                 if (i < delayTimes.Length)
                 {
                     dr2["DelayTime"] = delayTimes[i];
+                }
+                if (i < delayTimes.Length)
+                {
+                    dr2["Mode"] = modes[i];
                 }
                 dt2.Rows.Add(dr2);
             }

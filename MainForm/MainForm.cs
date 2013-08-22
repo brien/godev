@@ -199,5 +199,10 @@ namespace MainForm
                 }
             }
         }
+
+        private void btnOutputToExcel_Click(object sender, EventArgs e)
+        {
+            Junction.ExcelAutomation.CreateResultsWorksheet(GAS.ScheduleDataSet, GAS.GAResult);
+        }
     }
 }
