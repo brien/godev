@@ -30,8 +30,31 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnOutputToExcel = new System.Windows.Forms.Button();
+            this.GroupBox7 = new System.Windows.Forms.GroupBox();
+            this.lblBOMViolations = new System.Windows.Forms.Label();
+            this.Label5 = new System.Windows.Forms.Label();
+            this.Label24 = new System.Windows.Forms.Label();
+            this.lblResourceViolations = new System.Windows.Forms.Label();
+            this.lblLateJobsService = new System.Windows.Forms.Label();
+            this.LineLateJobs = new System.Windows.Forms.Label();
+            this.Label25 = new System.Windows.Forms.Label();
+            this.lblLateJobsLine = new System.Windows.Forms.Label();
+            this.Label6 = new System.Windows.Forms.Label();
+            this.lblEarlyStartViolations = new System.Windows.Forms.Label();
+            this.gbResults = new System.Windows.Forms.GroupBox();
+            this.lblChangeOverTime = new System.Windows.Forms.Label();
+            this.lblRunTime = new System.Windows.Forms.Label();
+            this.Label22 = new System.Windows.Forms.Label();
+            this.lblTotalTime = new System.Windows.Forms.Label();
+            this.lblSolveTime = new System.Windows.Forms.Label();
+            this.Label21 = new System.Windows.Forms.Label();
+            this.Label7 = new System.Windows.Forms.Label();
+            this.Label20 = new System.Windows.Forms.Label();
+            this.Label3 = new System.Windows.Forms.Label();
+            this.lblResult = new System.Windows.Forms.Label();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSolve = new System.Windows.Forms.Button();
             this.tbStartingScheduleName = new System.Windows.Forms.TextBox();
             this.Label29 = new System.Windows.Forms.Label();
             this.btnSelectStartingSchedule = new System.Windows.Forms.Button();
@@ -39,7 +62,7 @@
             this.tbWorkBookName = new System.Windows.Forms.TextBox();
             this.Label18 = new System.Windows.Forms.Label();
             this.cbShowStatus = new System.Windows.Forms.CheckBox();
-            this.btnSolve = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.GroupBox10 = new System.Windows.Forms.GroupBox();
             this.rbMeanWithNoise = new System.Windows.Forms.RadioButton();
             this.rbUniform = new System.Windows.Forms.RadioButton();
@@ -95,33 +118,13 @@
             this.Label12 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dgvSchedule = new System.Windows.Forms.DataGridView();
-            this.GroupBox7 = new System.Windows.Forms.GroupBox();
-            this.lblBOMViolations = new System.Windows.Forms.Label();
-            this.Label5 = new System.Windows.Forms.Label();
-            this.Label24 = new System.Windows.Forms.Label();
-            this.lblResourceViolations = new System.Windows.Forms.Label();
-            this.lblLateJobsService = new System.Windows.Forms.Label();
-            this.LineLateJobs = new System.Windows.Forms.Label();
-            this.Label25 = new System.Windows.Forms.Label();
-            this.lblLateJobsLine = new System.Windows.Forms.Label();
-            this.Label6 = new System.Windows.Forms.Label();
-            this.lblEarlyStartViolations = new System.Windows.Forms.Label();
-            this.gbResults = new System.Windows.Forms.GroupBox();
-            this.lblChangeOverTime = new System.Windows.Forms.Label();
-            this.lblRunTime = new System.Windows.Forms.Label();
-            this.Label22 = new System.Windows.Forms.Label();
-            this.lblTotalTime = new System.Windows.Forms.Label();
-            this.lblSolveTime = new System.Windows.Forms.Label();
-            this.Label21 = new System.Windows.Forms.Label();
-            this.Label7 = new System.Windows.Forms.Label();
-            this.Label20 = new System.Windows.Forms.Label();
-            this.Label3 = new System.Windows.Forms.Label();
-            this.lblResult = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.GroupBox7.SuspendLayout();
+            this.gbResults.SuspendLayout();
             this.GroupBox1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.GroupBox10.SuspendLayout();
             this.GroupBox9.SuspendLayout();
             this.gbSurvival.SuspendLayout();
@@ -133,8 +136,6 @@
             this.GroupBox2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSchedule)).BeginInit();
-            this.GroupBox7.SuspendLayout();
-            this.gbResults.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -152,6 +153,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnOutputToExcel);
             this.tabPage1.Controls.Add(this.GroupBox7);
             this.tabPage1.Controls.Add(this.gbResults);
             this.tabPage1.Controls.Add(this.GroupBox1);
@@ -163,30 +165,243 @@
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // btnOutputToExcel
             // 
-            this.tabPage2.Controls.Add(this.GroupBox10);
-            this.tabPage2.Controls.Add(this.GroupBox9);
-            this.tabPage2.Controls.Add(this.gbSurvival);
-            this.tabPage2.Controls.Add(this.Label26);
-            this.tabPage2.Controls.Add(this.Label23);
-            this.tabPage2.Controls.Add(this.tbMeanDelay);
-            this.tabPage2.Controls.Add(this.tbDelayProb);
-            this.tabPage2.Controls.Add(this.Label9);
-            this.tabPage2.Controls.Add(this.tbDeathRate);
-            this.tabPage2.Controls.Add(this.Label2);
-            this.tabPage2.Controls.Add(this.tbGenerations);
-            this.tabPage2.Controls.Add(this.Label8);
-            this.tabPage2.Controls.Add(this.Label1);
-            this.tabPage2.Controls.Add(this.tbHerdSize);
-            this.tabPage2.Controls.Add(this.tbMutationProbability);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(824, 523);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Optimization Parameters";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.btnOutputToExcel.Location = new System.Drawing.Point(402, 426);
+            this.btnOutputToExcel.Name = "btnOutputToExcel";
+            this.btnOutputToExcel.Size = new System.Drawing.Size(94, 27);
+            this.btnOutputToExcel.TabIndex = 40;
+            this.btnOutputToExcel.Text = "Output to Excel";
+            this.btnOutputToExcel.UseVisualStyleBackColor = true;
+            this.btnOutputToExcel.Click += new System.EventHandler(this.btnOutputToExcel_Click);
+            // 
+            // GroupBox7
+            // 
+            this.GroupBox7.Controls.Add(this.lblBOMViolations);
+            this.GroupBox7.Controls.Add(this.Label5);
+            this.GroupBox7.Controls.Add(this.Label24);
+            this.GroupBox7.Controls.Add(this.lblResourceViolations);
+            this.GroupBox7.Controls.Add(this.lblLateJobsService);
+            this.GroupBox7.Controls.Add(this.LineLateJobs);
+            this.GroupBox7.Controls.Add(this.Label25);
+            this.GroupBox7.Controls.Add(this.lblLateJobsLine);
+            this.GroupBox7.Controls.Add(this.Label6);
+            this.GroupBox7.Controls.Add(this.lblEarlyStartViolations);
+            this.GroupBox7.Location = new System.Drawing.Point(376, 206);
+            this.GroupBox7.Name = "GroupBox7";
+            this.GroupBox7.Size = new System.Drawing.Size(260, 192);
+            this.GroupBox7.TabIndex = 39;
+            this.GroupBox7.TabStop = false;
+            this.GroupBox7.Text = "Constraint Violations";
+            // 
+            // lblBOMViolations
+            // 
+            this.lblBOMViolations.AutoSize = true;
+            this.lblBOMViolations.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBOMViolations.Location = new System.Drawing.Point(124, 159);
+            this.lblBOMViolations.Name = "lblBOMViolations";
+            this.lblBOMViolations.Size = new System.Drawing.Size(18, 20);
+            this.lblBOMViolations.TabIndex = 38;
+            this.lblBOMViolations.Text = "0";
+            // 
+            // Label5
+            // 
+            this.Label5.AutoSize = true;
+            this.Label5.Location = new System.Drawing.Point(19, 159);
+            this.Label5.Name = "Label5";
+            this.Label5.Size = new System.Drawing.Size(79, 13);
+            this.Label5.TabIndex = 37;
+            this.Label5.Text = "BOM Violations";
+            // 
+            // Label24
+            // 
+            this.Label24.AutoSize = true;
+            this.Label24.Location = new System.Drawing.Point(18, 62);
+            this.Label24.Name = "Label24";
+            this.Label24.Size = new System.Drawing.Size(92, 13);
+            this.Label24.TabIndex = 27;
+            this.Label24.Text = "Late Jobs-Service";
+            // 
+            // lblResourceViolations
+            // 
+            this.lblResourceViolations.AutoSize = true;
+            this.lblResourceViolations.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResourceViolations.Location = new System.Drawing.Point(124, 126);
+            this.lblResourceViolations.Name = "lblResourceViolations";
+            this.lblResourceViolations.Size = new System.Drawing.Size(18, 20);
+            this.lblResourceViolations.TabIndex = 36;
+            this.lblResourceViolations.Text = "0";
+            // 
+            // lblLateJobsService
+            // 
+            this.lblLateJobsService.AutoSize = true;
+            this.lblLateJobsService.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLateJobsService.Location = new System.Drawing.Point(125, 62);
+            this.lblLateJobsService.Name = "lblLateJobsService";
+            this.lblLateJobsService.Size = new System.Drawing.Size(18, 20);
+            this.lblLateJobsService.TabIndex = 28;
+            this.lblLateJobsService.Text = "0";
+            // 
+            // LineLateJobs
+            // 
+            this.LineLateJobs.AutoSize = true;
+            this.LineLateJobs.Location = new System.Drawing.Point(19, 30);
+            this.LineLateJobs.Name = "LineLateJobs";
+            this.LineLateJobs.Size = new System.Drawing.Size(82, 13);
+            this.LineLateJobs.TabIndex = 31;
+            this.LineLateJobs.Text = "Late Jobs - Line";
+            // 
+            // Label25
+            // 
+            this.Label25.AutoSize = true;
+            this.Label25.Location = new System.Drawing.Point(17, 126);
+            this.Label25.Name = "Label25";
+            this.Label25.Size = new System.Drawing.Size(101, 13);
+            this.Label25.TabIndex = 35;
+            this.Label25.Text = "Resource Violations";
+            // 
+            // lblLateJobsLine
+            // 
+            this.lblLateJobsLine.AutoSize = true;
+            this.lblLateJobsLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLateJobsLine.Location = new System.Drawing.Point(125, 30);
+            this.lblLateJobsLine.Name = "lblLateJobsLine";
+            this.lblLateJobsLine.Size = new System.Drawing.Size(18, 20);
+            this.lblLateJobsLine.TabIndex = 32;
+            this.lblLateJobsLine.Text = "0";
+            // 
+            // Label6
+            // 
+            this.Label6.AutoSize = true;
+            this.Label6.Location = new System.Drawing.Point(17, 94);
+            this.Label6.Name = "Label6";
+            this.Label6.Size = new System.Drawing.Size(103, 13);
+            this.Label6.TabIndex = 33;
+            this.Label6.Text = "Early Start Violations";
+            // 
+            // lblEarlyStartViolations
+            // 
+            this.lblEarlyStartViolations.AutoSize = true;
+            this.lblEarlyStartViolations.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEarlyStartViolations.Location = new System.Drawing.Point(124, 94);
+            this.lblEarlyStartViolations.Name = "lblEarlyStartViolations";
+            this.lblEarlyStartViolations.Size = new System.Drawing.Size(18, 20);
+            this.lblEarlyStartViolations.TabIndex = 34;
+            this.lblEarlyStartViolations.Text = "0";
+            // 
+            // gbResults
+            // 
+            this.gbResults.Controls.Add(this.lblChangeOverTime);
+            this.gbResults.Controls.Add(this.lblRunTime);
+            this.gbResults.Controls.Add(this.Label22);
+            this.gbResults.Controls.Add(this.lblTotalTime);
+            this.gbResults.Controls.Add(this.lblSolveTime);
+            this.gbResults.Controls.Add(this.Label21);
+            this.gbResults.Controls.Add(this.Label7);
+            this.gbResults.Controls.Add(this.Label20);
+            this.gbResults.Controls.Add(this.Label3);
+            this.gbResults.Controls.Add(this.lblResult);
+            this.gbResults.Location = new System.Drawing.Point(376, 16);
+            this.gbResults.Name = "gbResults";
+            this.gbResults.Size = new System.Drawing.Size(260, 171);
+            this.gbResults.TabIndex = 38;
+            this.gbResults.TabStop = false;
+            this.gbResults.Text = "Results";
+            // 
+            // lblChangeOverTime
+            // 
+            this.lblChangeOverTime.AutoSize = true;
+            this.lblChangeOverTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChangeOverTime.Location = new System.Drawing.Point(112, 109);
+            this.lblChangeOverTime.Name = "lblChangeOverTime";
+            this.lblChangeOverTime.Size = new System.Drawing.Size(18, 20);
+            this.lblChangeOverTime.TabIndex = 26;
+            this.lblChangeOverTime.Text = "0";
+            // 
+            // lblRunTime
+            // 
+            this.lblRunTime.AutoSize = true;
+            this.lblRunTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRunTime.Location = new System.Drawing.Point(112, 83);
+            this.lblRunTime.Name = "lblRunTime";
+            this.lblRunTime.Size = new System.Drawing.Size(18, 20);
+            this.lblRunTime.TabIndex = 30;
+            this.lblRunTime.Text = "0";
+            // 
+            // Label22
+            // 
+            this.Label22.AutoSize = true;
+            this.Label22.Location = new System.Drawing.Point(19, 114);
+            this.Label22.Name = "Label22";
+            this.Label22.Size = new System.Drawing.Size(96, 13);
+            this.Label22.TabIndex = 25;
+            this.Label22.Text = "Change Over Time";
+            // 
+            // lblTotalTime
+            // 
+            this.lblTotalTime.AutoSize = true;
+            this.lblTotalTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalTime.Location = new System.Drawing.Point(112, 133);
+            this.lblTotalTime.Name = "lblTotalTime";
+            this.lblTotalTime.Size = new System.Drawing.Size(18, 20);
+            this.lblTotalTime.TabIndex = 24;
+            this.lblTotalTime.Text = "0";
+            // 
+            // lblSolveTime
+            // 
+            this.lblSolveTime.AutoSize = true;
+            this.lblSolveTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSolveTime.Location = new System.Drawing.Point(112, 57);
+            this.lblSolveTime.Name = "lblSolveTime";
+            this.lblSolveTime.Size = new System.Drawing.Size(86, 20);
+            this.lblSolveTime.TabIndex = 10;
+            this.lblSolveTime.Text = "Solve Time";
+            // 
+            // Label21
+            // 
+            this.Label21.AutoSize = true;
+            this.Label21.Location = new System.Drawing.Point(19, 88);
+            this.Label21.Name = "Label21";
+            this.Label21.Size = new System.Drawing.Size(85, 13);
+            this.Label21.TabIndex = 29;
+            this.Label21.Text = "Processing Time";
+            // 
+            // Label7
+            // 
+            this.Label7.AutoSize = true;
+            this.Label7.Location = new System.Drawing.Point(19, 62);
+            this.Label7.Name = "Label7";
+            this.Label7.Size = new System.Drawing.Size(60, 13);
+            this.Label7.TabIndex = 9;
+            this.Label7.Text = "Solve Time";
+            // 
+            // Label20
+            // 
+            this.Label20.AutoSize = true;
+            this.Label20.Location = new System.Drawing.Point(17, 138);
+            this.Label20.Name = "Label20";
+            this.Label20.Size = new System.Drawing.Size(57, 13);
+            this.Label20.TabIndex = 23;
+            this.Label20.Text = "Total Time";
+            // 
+            // Label3
+            // 
+            this.Label3.AutoSize = true;
+            this.Label3.Location = new System.Drawing.Point(19, 32);
+            this.Label3.Name = "Label3";
+            this.Label3.Size = new System.Drawing.Size(58, 13);
+            this.Label3.TabIndex = 7;
+            this.Label3.Text = "Best Value";
+            // 
+            // lblResult
+            // 
+            this.lblResult.AutoSize = true;
+            this.lblResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResult.Location = new System.Drawing.Point(112, 32);
+            this.lblResult.Name = "lblResult";
+            this.lblResult.Size = new System.Drawing.Size(112, 20);
+            this.lblResult.TabIndex = 8;
+            this.lblResult.Text = "Solution Value";
             // 
             // GroupBox1
             // 
@@ -204,6 +419,16 @@
             this.GroupBox1.TabIndex = 18;
             this.GroupBox1.TabStop = false;
             this.GroupBox1.Text = "Run Conditions";
+            // 
+            // btnSolve
+            // 
+            this.btnSolve.Location = new System.Drawing.Point(281, 138);
+            this.btnSolve.Name = "btnSolve";
+            this.btnSolve.Size = new System.Drawing.Size(75, 23);
+            this.btnSolve.TabIndex = 19;
+            this.btnSolve.Text = "Solve";
+            this.btnSolve.UseVisualStyleBackColor = true;
+            this.btnSolve.Click += new System.EventHandler(this.btnSolve_Click);
             // 
             // tbStartingScheduleName
             // 
@@ -230,6 +455,7 @@
             this.btnSelectStartingSchedule.TabIndex = 19;
             this.btnSelectStartingSchedule.Text = "Browse";
             this.btnSelectStartingSchedule.UseVisualStyleBackColor = true;
+            this.btnSelectStartingSchedule.Click += new System.EventHandler(this.btnSelectStartingSchedule_Click);
             // 
             // btnSelectSpreadSheet
             // 
@@ -270,15 +496,30 @@
             this.cbShowStatus.Text = "Show Status While Running";
             this.cbShowStatus.UseVisualStyleBackColor = true;
             // 
-            // btnSolve
+            // tabPage2
             // 
-            this.btnSolve.Location = new System.Drawing.Point(281, 138);
-            this.btnSolve.Name = "btnSolve";
-            this.btnSolve.Size = new System.Drawing.Size(75, 23);
-            this.btnSolve.TabIndex = 19;
-            this.btnSolve.Text = "Solve";
-            this.btnSolve.UseVisualStyleBackColor = true;
-            this.btnSolve.Click += new System.EventHandler(this.btnSolve_Click);
+            this.tabPage2.Controls.Add(this.GroupBox10);
+            this.tabPage2.Controls.Add(this.GroupBox9);
+            this.tabPage2.Controls.Add(this.gbSurvival);
+            this.tabPage2.Controls.Add(this.Label26);
+            this.tabPage2.Controls.Add(this.Label23);
+            this.tabPage2.Controls.Add(this.tbMeanDelay);
+            this.tabPage2.Controls.Add(this.tbDelayProb);
+            this.tabPage2.Controls.Add(this.Label9);
+            this.tabPage2.Controls.Add(this.tbDeathRate);
+            this.tabPage2.Controls.Add(this.Label2);
+            this.tabPage2.Controls.Add(this.tbGenerations);
+            this.tabPage2.Controls.Add(this.Label8);
+            this.tabPage2.Controls.Add(this.Label1);
+            this.tabPage2.Controls.Add(this.tbHerdSize);
+            this.tabPage2.Controls.Add(this.tbMutationProbability);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(824, 523);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Optimization Parameters";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // GroupBox10
             // 
@@ -576,7 +817,7 @@
             this.tbLineInfeasibility.Name = "tbLineInfeasibility";
             this.tbLineInfeasibility.Size = new System.Drawing.Size(100, 20);
             this.tbLineInfeasibility.TabIndex = 45;
-            this.tbLineInfeasibility.Text = "1000";
+            this.tbLineInfeasibility.Text = "4000";
             // 
             // Label28
             // 
@@ -833,234 +1074,6 @@
             this.dgvSchedule.TabIndex = 1;
             this.dgvSchedule.Paint += new System.Windows.Forms.PaintEventHandler(this.dgvSchedule_Paint);
             // 
-            // GroupBox7
-            // 
-            this.GroupBox7.Controls.Add(this.lblBOMViolations);
-            this.GroupBox7.Controls.Add(this.Label5);
-            this.GroupBox7.Controls.Add(this.Label24);
-            this.GroupBox7.Controls.Add(this.lblResourceViolations);
-            this.GroupBox7.Controls.Add(this.lblLateJobsService);
-            this.GroupBox7.Controls.Add(this.LineLateJobs);
-            this.GroupBox7.Controls.Add(this.Label25);
-            this.GroupBox7.Controls.Add(this.lblLateJobsLine);
-            this.GroupBox7.Controls.Add(this.Label6);
-            this.GroupBox7.Controls.Add(this.lblEarlyStartViolations);
-            this.GroupBox7.Location = new System.Drawing.Point(376, 206);
-            this.GroupBox7.Name = "GroupBox7";
-            this.GroupBox7.Size = new System.Drawing.Size(260, 192);
-            this.GroupBox7.TabIndex = 39;
-            this.GroupBox7.TabStop = false;
-            this.GroupBox7.Text = "Constraint Violations";
-            // 
-            // lblBOMViolations
-            // 
-            this.lblBOMViolations.AutoSize = true;
-            this.lblBOMViolations.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBOMViolations.Location = new System.Drawing.Point(124, 159);
-            this.lblBOMViolations.Name = "lblBOMViolations";
-            this.lblBOMViolations.Size = new System.Drawing.Size(18, 20);
-            this.lblBOMViolations.TabIndex = 38;
-            this.lblBOMViolations.Text = "0";
-            // 
-            // Label5
-            // 
-            this.Label5.AutoSize = true;
-            this.Label5.Location = new System.Drawing.Point(19, 159);
-            this.Label5.Name = "Label5";
-            this.Label5.Size = new System.Drawing.Size(79, 13);
-            this.Label5.TabIndex = 37;
-            this.Label5.Text = "BOM Violations";
-            // 
-            // Label24
-            // 
-            this.Label24.AutoSize = true;
-            this.Label24.Location = new System.Drawing.Point(18, 62);
-            this.Label24.Name = "Label24";
-            this.Label24.Size = new System.Drawing.Size(92, 13);
-            this.Label24.TabIndex = 27;
-            this.Label24.Text = "Late Jobs-Service";
-            // 
-            // lblResourceViolations
-            // 
-            this.lblResourceViolations.AutoSize = true;
-            this.lblResourceViolations.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResourceViolations.Location = new System.Drawing.Point(124, 126);
-            this.lblResourceViolations.Name = "lblResourceViolations";
-            this.lblResourceViolations.Size = new System.Drawing.Size(18, 20);
-            this.lblResourceViolations.TabIndex = 36;
-            this.lblResourceViolations.Text = "0";
-            // 
-            // lblLateJobsService
-            // 
-            this.lblLateJobsService.AutoSize = true;
-            this.lblLateJobsService.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLateJobsService.Location = new System.Drawing.Point(125, 62);
-            this.lblLateJobsService.Name = "lblLateJobsService";
-            this.lblLateJobsService.Size = new System.Drawing.Size(18, 20);
-            this.lblLateJobsService.TabIndex = 28;
-            this.lblLateJobsService.Text = "0";
-            // 
-            // LineLateJobs
-            // 
-            this.LineLateJobs.AutoSize = true;
-            this.LineLateJobs.Location = new System.Drawing.Point(19, 30);
-            this.LineLateJobs.Name = "LineLateJobs";
-            this.LineLateJobs.Size = new System.Drawing.Size(82, 13);
-            this.LineLateJobs.TabIndex = 31;
-            this.LineLateJobs.Text = "Late Jobs - Line";
-            // 
-            // Label25
-            // 
-            this.Label25.AutoSize = true;
-            this.Label25.Location = new System.Drawing.Point(17, 126);
-            this.Label25.Name = "Label25";
-            this.Label25.Size = new System.Drawing.Size(101, 13);
-            this.Label25.TabIndex = 35;
-            this.Label25.Text = "Resource Violations";
-            // 
-            // lblLateJobsLine
-            // 
-            this.lblLateJobsLine.AutoSize = true;
-            this.lblLateJobsLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLateJobsLine.Location = new System.Drawing.Point(125, 30);
-            this.lblLateJobsLine.Name = "lblLateJobsLine";
-            this.lblLateJobsLine.Size = new System.Drawing.Size(18, 20);
-            this.lblLateJobsLine.TabIndex = 32;
-            this.lblLateJobsLine.Text = "0";
-            // 
-            // Label6
-            // 
-            this.Label6.AutoSize = true;
-            this.Label6.Location = new System.Drawing.Point(17, 94);
-            this.Label6.Name = "Label6";
-            this.Label6.Size = new System.Drawing.Size(103, 13);
-            this.Label6.TabIndex = 33;
-            this.Label6.Text = "Early Start Violations";
-            // 
-            // lblEarlyStartViolations
-            // 
-            this.lblEarlyStartViolations.AutoSize = true;
-            this.lblEarlyStartViolations.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEarlyStartViolations.Location = new System.Drawing.Point(124, 94);
-            this.lblEarlyStartViolations.Name = "lblEarlyStartViolations";
-            this.lblEarlyStartViolations.Size = new System.Drawing.Size(18, 20);
-            this.lblEarlyStartViolations.TabIndex = 34;
-            this.lblEarlyStartViolations.Text = "0";
-            // 
-            // gbResults
-            // 
-            this.gbResults.Controls.Add(this.lblChangeOverTime);
-            this.gbResults.Controls.Add(this.lblRunTime);
-            this.gbResults.Controls.Add(this.Label22);
-            this.gbResults.Controls.Add(this.lblTotalTime);
-            this.gbResults.Controls.Add(this.lblSolveTime);
-            this.gbResults.Controls.Add(this.Label21);
-            this.gbResults.Controls.Add(this.Label7);
-            this.gbResults.Controls.Add(this.Label20);
-            this.gbResults.Controls.Add(this.Label3);
-            this.gbResults.Controls.Add(this.lblResult);
-            this.gbResults.Location = new System.Drawing.Point(376, 16);
-            this.gbResults.Name = "gbResults";
-            this.gbResults.Size = new System.Drawing.Size(260, 171);
-            this.gbResults.TabIndex = 38;
-            this.gbResults.TabStop = false;
-            this.gbResults.Text = "Results";
-            // 
-            // lblChangeOverTime
-            // 
-            this.lblChangeOverTime.AutoSize = true;
-            this.lblChangeOverTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChangeOverTime.Location = new System.Drawing.Point(112, 109);
-            this.lblChangeOverTime.Name = "lblChangeOverTime";
-            this.lblChangeOverTime.Size = new System.Drawing.Size(18, 20);
-            this.lblChangeOverTime.TabIndex = 26;
-            this.lblChangeOverTime.Text = "0";
-            // 
-            // lblRunTime
-            // 
-            this.lblRunTime.AutoSize = true;
-            this.lblRunTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRunTime.Location = new System.Drawing.Point(112, 83);
-            this.lblRunTime.Name = "lblRunTime";
-            this.lblRunTime.Size = new System.Drawing.Size(18, 20);
-            this.lblRunTime.TabIndex = 30;
-            this.lblRunTime.Text = "0";
-            // 
-            // Label22
-            // 
-            this.Label22.AutoSize = true;
-            this.Label22.Location = new System.Drawing.Point(19, 114);
-            this.Label22.Name = "Label22";
-            this.Label22.Size = new System.Drawing.Size(96, 13);
-            this.Label22.TabIndex = 25;
-            this.Label22.Text = "Change Over Time";
-            // 
-            // lblTotalTime
-            // 
-            this.lblTotalTime.AutoSize = true;
-            this.lblTotalTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalTime.Location = new System.Drawing.Point(112, 133);
-            this.lblTotalTime.Name = "lblTotalTime";
-            this.lblTotalTime.Size = new System.Drawing.Size(18, 20);
-            this.lblTotalTime.TabIndex = 24;
-            this.lblTotalTime.Text = "0";
-            // 
-            // lblSolveTime
-            // 
-            this.lblSolveTime.AutoSize = true;
-            this.lblSolveTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSolveTime.Location = new System.Drawing.Point(112, 57);
-            this.lblSolveTime.Name = "lblSolveTime";
-            this.lblSolveTime.Size = new System.Drawing.Size(86, 20);
-            this.lblSolveTime.TabIndex = 10;
-            this.lblSolveTime.Text = "Solve Time";
-            // 
-            // Label21
-            // 
-            this.Label21.AutoSize = true;
-            this.Label21.Location = new System.Drawing.Point(19, 88);
-            this.Label21.Name = "Label21";
-            this.Label21.Size = new System.Drawing.Size(85, 13);
-            this.Label21.TabIndex = 29;
-            this.Label21.Text = "Processing Time";
-            // 
-            // Label7
-            // 
-            this.Label7.AutoSize = true;
-            this.Label7.Location = new System.Drawing.Point(19, 62);
-            this.Label7.Name = "Label7";
-            this.Label7.Size = new System.Drawing.Size(60, 13);
-            this.Label7.TabIndex = 9;
-            this.Label7.Text = "Solve Time";
-            // 
-            // Label20
-            // 
-            this.Label20.AutoSize = true;
-            this.Label20.Location = new System.Drawing.Point(17, 138);
-            this.Label20.Name = "Label20";
-            this.Label20.Size = new System.Drawing.Size(57, 13);
-            this.Label20.TabIndex = 23;
-            this.Label20.Text = "Total Time";
-            // 
-            // Label3
-            // 
-            this.Label3.AutoSize = true;
-            this.Label3.Location = new System.Drawing.Point(19, 32);
-            this.Label3.Name = "Label3";
-            this.Label3.Size = new System.Drawing.Size(58, 13);
-            this.Label3.TabIndex = 7;
-            this.Label3.Text = "Best Value";
-            // 
-            // lblResult
-            // 
-            this.lblResult.AutoSize = true;
-            this.lblResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResult.Location = new System.Drawing.Point(112, 32);
-            this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(112, 20);
-            this.lblResult.TabIndex = 8;
-            this.lblResult.Text = "Solution Value";
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -1076,10 +1089,14 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.GroupBox7.ResumeLayout(false);
+            this.GroupBox7.PerformLayout();
+            this.gbResults.ResumeLayout(false);
+            this.gbResults.PerformLayout();
             this.GroupBox1.ResumeLayout(false);
             this.GroupBox1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.GroupBox10.ResumeLayout(false);
             this.GroupBox10.PerformLayout();
             this.GroupBox9.ResumeLayout(false);
@@ -1099,10 +1116,6 @@
             this.GroupBox2.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSchedule)).EndInit();
-            this.GroupBox7.ResumeLayout(false);
-            this.GroupBox7.PerformLayout();
-            this.gbResults.ResumeLayout(false);
-            this.gbResults.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1199,6 +1212,7 @@
         internal System.Windows.Forms.Label Label3;
         internal System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button btnOutputToExcel;
     }
 }
 

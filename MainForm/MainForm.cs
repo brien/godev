@@ -78,61 +78,22 @@ namespace MainForm
             // The next section of code loads worksheets into multiple data tables within a single data set
             // The dataset is then passed to the scheduler via the GAS.Masterdata Property.
             // Create a master data set with line, product, changeover, and order data in it.
-            DataSet ds;
             DataSet ds2 = new DataSet();
 
             // Add the Production Line Master Data
-            ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbWorkBookName.Text, "Resources");
-            DataTable dt = ds.Tables[0];
-            ds.Tables.Remove(dt);
-            ds2.Tables.Add(dt);
-
-
-            // Add the Product Spreadsheet.
-            ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbWorkBookName.Text, "Products");
-            dt = ds.Tables[0];
-            ds.Tables.Remove(dt);
-            ds2.Tables.Add(dt);
-
-            // Add the orders data set
-            ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbWorkBookName.Text, "Orders");
-            dt = ds.Tables[0];
-            ds.Tables.Remove(dt);
-            ds2.Tables.Add(dt);
-
-            // Add the Changeover time. Time of changing (From, To) products
-            ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbWorkBookName.Text, "Change Over");
-            dt = ds.Tables[0];
-            ds.Tables.Remove(dt);
-            ds2.Tables.Add(dt);
-
-            // Add the Changeover Penalty. Penalty (not time) of changing (From, To) products
-            ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbWorkBookName.Text, "Change Over Penalties");
-            dt = ds.Tables[0];
-            ds.Tables.Remove(dt);
-            ds2.Tables.Add(dt);
-
-            // Add the BOM Items
-            ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbWorkBookName.Text, "BOMItems");
-            dt = ds.Tables[0];
-            ds.Tables.Remove(dt);
-            ds2.Tables.Add(dt);
-
-            // Add the pre-existing inventory
-            ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbWorkBookName.Text, "Inventory");
-            dt = ds.Tables[0];
-            ds.Tables.Remove(dt);
-            ds2.Tables.Add(dt);
+            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Resources");
+            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Products");
+            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Orders");
+            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Change Over");
+            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Change Over Penalties");
+            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "BOMItems");
+            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Inventory");
 
             if (this.GAS.seededRun)
             {
                 // Add the pre-existing schedule
-                ds = Junction.ExcelAutomation.GetDataSetFromExcel(tbStartingScheduleName.Text, "Raw Genome");
-                dt = ds.Tables[0];
-                ds.Tables.Remove(dt);
-                ds2.Tables.Add(dt);
+                AddExcelTableToMasterData(ref ds2, tbStartingScheduleName.Text, "Raw Genome");
             }
-
 
             // Send the complete dataset to the scheduler
             this.GAS.MasterData = ds2;
@@ -199,7 +160,14 @@ namespace MainForm
             dgvSchedule.AutoResizeColumn(4, DataGridViewAutoSizeColumnMode.AllCells);
             dgvSchedule.AutoSize = true;
         }
-
+        private void AddExcelTableToMasterData(ref DataSet ds2, string bookName, string sheetName)
+        {
+            DataSet ds = new DataSet();
+            ds = Junction.ExcelAutomation.GetDataSetFromExcel(bookName, sheetName);
+            DataTable dt = ds.Tables[0];
+            ds.Tables.Remove(dt);
+            ds2.Tables.Add(dt);
+        }
         private void btnSelectSpreadSheet_Click(object sender, EventArgs e)
         {
             String DefaultDir = Application.StartupPath;
@@ -230,6 +198,30 @@ namespace MainForm
                     dgvr.DefaultCellStyle.BackColor = Color.LightPink;
                 }
             }
+        }
+
+        private void btnOutputToExcel_Click(object sender, EventArgs e)
+        {
+            Junction.ExcelAutomation.CreateResultsWorksheet(GAS.ScheduleDataSet, GAS.GAResult);
+        }
+
+        private void btnSelectStartingSchedule_Click(object sender, EventArgs e)
+        {
+            string defaultDir = Application.StartupPath;
+            openFileDialog1.InitialDirectory = defaultDir;
+            openFileDialog1.FileName = "TestImport.xlsx";
+            openFileDialog1.Filter = "Excel 2007 Workbooks (*.xlsx)|*.xlsx|Excel 98-2005 Workbooks (*.xls)|*.xls";
+            openFileDialog1.CheckFileExists = true;
+            openFileDialog1.ShowReadOnly = true;
+            if( openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                tbStartingScheduleName.Text = openFileDialog1.FileName;
+            }
+            else
+            {
+                MessageBox.Show("Error Selecting File");
+            }
+            GAS.seededRun = true;
         }
     }
 }
