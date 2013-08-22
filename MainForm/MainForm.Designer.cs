@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnOutputToExcel = new System.Windows.Forms.Button();
             this.GroupBox7 = new System.Windows.Forms.GroupBox();
             this.lblBOMViolations = new System.Windows.Forms.Label();
             this.Label5 = new System.Windows.Forms.Label();
@@ -118,7 +119,6 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dgvSchedule = new System.Windows.Forms.DataGridView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.btnOutputToExcel = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GroupBox7.SuspendLayout();
@@ -164,6 +164,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnOutputToExcel
+            // 
+            this.btnOutputToExcel.Location = new System.Drawing.Point(402, 426);
+            this.btnOutputToExcel.Name = "btnOutputToExcel";
+            this.btnOutputToExcel.Size = new System.Drawing.Size(94, 27);
+            this.btnOutputToExcel.TabIndex = 40;
+            this.btnOutputToExcel.Text = "Output to Excel";
+            this.btnOutputToExcel.UseVisualStyleBackColor = true;
+            this.btnOutputToExcel.Click += new System.EventHandler(this.btnOutputToExcel_Click);
             // 
             // GroupBox7
             // 
@@ -806,7 +816,7 @@
             this.tbLineInfeasibility.Name = "tbLineInfeasibility";
             this.tbLineInfeasibility.Size = new System.Drawing.Size(100, 20);
             this.tbLineInfeasibility.TabIndex = 45;
-            this.tbLineInfeasibility.Text = "1000";
+            this.tbLineInfeasibility.Text = "4000";
             // 
             // Label28
             // 
@@ -1066,16 +1076,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // btnOutputToExcel
-            // 
-            this.btnOutputToExcel.Location = new System.Drawing.Point(402, 426);
-            this.btnOutputToExcel.Name = "btnOutputToExcel";
-            this.btnOutputToExcel.Size = new System.Drawing.Size(94, 27);
-            this.btnOutputToExcel.TabIndex = 40;
-            this.btnOutputToExcel.Text = "Output to Excel";
-            this.btnOutputToExcel.UseVisualStyleBackColor = true;
-            this.btnOutputToExcel.Click += new System.EventHandler(this.btnOutputToExcel_Click);
             // 
             // MainForm
             // 
