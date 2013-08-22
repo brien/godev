@@ -706,9 +706,9 @@ namespace Junction
             modeCol.ColumnName = "Mode";
             dt2.Columns.Add(modeCol);
 
+            // This is no longer well-written. All vectors are the same length now.
             for (int i = 0; i < genes.Length; i++)
             {
-
                 DataRow dr2 = dt2.NewRow();
                 dr2["Genes"] = genes[i];
                 if (i < delayTimes.Length)
