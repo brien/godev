@@ -489,13 +489,13 @@ namespace Junction
                         dr["Resource Feasibility"] = false;
                     }
 
-                    //Initialize BOM Violation to false as a defualt
+                    // Initialize BOM Violation to false as a defualt
                     dr["BOM Violation"] = false;
 
                     dr["Allergens"] = AllergensInProduct[Product];
                     dr["Resource Number"] = ScheduleResult[5, i];
                     dr["Resource Name"] = ResourceName[(int)ScheduleResult[5, i] - 1];
-                    // set the allergen alerts
+                    // Set the allergen alerts
                     dr["Allergen Alert"] = Allergens.None;
 
 
@@ -523,9 +523,9 @@ namespace Junction
                         }
                     }
 
-                    //convert the decimal due date to a date or a blank if unconstrained
+                    // Convert the decimal due date to a date or a blank if unconstrained
                     double decDate = (double)ScheduleResult[4, i];
-                    //double decDate = Priority[Job];
+                    // Double decDate = Priority[Job];
                     if (decDate == UNCONSTRAINED_TIME)
                     {
                         dr["Time Due"] = DBNull.Value;
@@ -535,7 +535,7 @@ namespace Junction
                         dr["Time Due"] = Conversions.ConvertDate(decDate);
                     }
 
-                    //convert unconstrained early start time to a blank
+                    // Convert unconstrained early start time to a blank
                     DateTime es = (DateTime)dr["Early Start"];
                     if (es == DateTime.Today)
                     {
@@ -775,7 +775,7 @@ namespace Junction
                 CGA.SurvivalSelection();
                 if (ShowStatusWhileRunning & (i % (NumberOfGenerations / 100) == 0))
                 {
-                    //Update the status form
+                    // Update the status form
                     CGA.FindElite();
                     frmStatus.lblGeneration.Text = "Generation " + i.ToString();
                     frmStatus.lblAvgFitness.Text = String.Format("Average Fitness ={0: #,###.00}", Math.Abs(CGA.AverageFitness()));

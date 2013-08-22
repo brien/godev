@@ -4,6 +4,12 @@
 // Summary:
 // Contains an implementation of the Junction Solutions GeneticOptimizer,
 // a genetic algorithm for finding production schedules.
+//
+// History:
+// Version: 0.2
+// Date: 2013 8 22 17:08
+// After rebasing the project, rewriting parts in C# that were in VB,
+// and other improvements, all features (seem to) work as intended.
 
 using System;
 using System.Collections.Generic;
