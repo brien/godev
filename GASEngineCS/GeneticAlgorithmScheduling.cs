@@ -11,9 +11,10 @@ namespace Junction
 {
     public sealed class GeneticAlgorithmSchedulingCS
     {
-        private const double UNCONSTRAINED_TIME = 999999; // An arbitrary amount of time to add in decimal hours to create an unconstrained condition
+        // An arbitrary amount of time to add in decimal hours to create an unconstrained condition
+        private const double UNCONSTRAINED_TIME = 999999;
 
-        //Create a bit flag enumeration for allergens
+        // Create a bit flag enumeration for allergens
         [Flags]
         public enum Allergens
         {
@@ -34,12 +35,6 @@ namespace Junction
 
         char[] AllergenList = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I' };
 
-        // Flag to control the creation of delay jobs:
-        public bool doGenerateDelay;
-        // Run the refactored GA or the original Nestle Demo?
-        public bool runRefactored;
-        // Or Run the new GA (originally called constrained, no longer accurate description)?
-        public bool runConstrained;
         // The mean of the delay times:
         public double meanDelayTime;
         // The rate at which delay times are generated (probablilty of non-zero delay time)
@@ -57,7 +52,8 @@ namespace Junction
         //private double[] ProdRunTime;
         private static double[] JobRunTime;
         private String[] ProductName;
-        private static int[] BOMItemIndex; //Used to hold the index from the product to the BOMItem list
+        // Used to hold the index from the product to the BOMItem list
+        private static int[] BOMItemIndex; 
         private System.Collections.Hashtable ProductNumberHash;
         private string[] AllergensInProduct;
         private static double[,] ChangeOver;
@@ -65,10 +61,10 @@ namespace Junction
         private static int[] JobsToSchedule;
         private static double[] OrderQty;
         private object[,] ScheduleResult;
-        private int[,] Offspring;
-        private int[,] Population;
-        private static double[] Priority; //The due time in decimal hours
-        private static double[] EarlyStart; //Earliest start time in decimal hours
+        // The due time in decimal hours
+        private static double[] Priority;
+        // Earliest start time in decimal hours
+        private static double[] EarlyStart; 
         private double[] FitnessArray;
         private DateTime[] productionEndTime;
         private String[] ResourceName;
@@ -76,9 +72,12 @@ namespace Junction
         private DateTime[] productionStartTime;
         private static double[] ProdStartTime;
         private static int[] StartProduct;
-        private static double[] RLCMin; //Minimum Resource Late Cost
-        private static double[] RLCMax; //Maximum Resource Late Cost
-        private static double[] RLCRatePerHour; //increase in late cost for each hour late
+        // Minimum Resource Late Cost
+        private static double[] RLCMin; 
+        // Maximum Resource Late Cost
+        private static double[] RLCMax; 
+        // Increase in late cost for each hour late
+        private static double[] RLCRatePerHour; 
         private static double[] MinLateCost;
         private static double[] MaxLateCost;
         private static double[] LateCostPerHour;
@@ -217,7 +216,7 @@ namespace Junction
                 PreviousProd = -1;
             }
         }
-  
+
         private void CreateScheduleDataTable(int[] genes, double[] delayTimes, int[] modes)
         {
             DataTable dt = new DataTable();
@@ -729,8 +728,6 @@ namespace Junction
             }
 
             int NumJobs = JobsToSchedule.GetUpperBound(0) + 1;
-            Offspring = new int[PopulationSize, NumJobs];
-            Population = new int[PopulationSize, NumJobs];
             ScheduleResult = new object[7, NumJobs];
             FitnessArray = new double[PopulationSize];
             //bool Stopped = false; //Allow for interruption of a scheduling run
@@ -900,24 +897,7 @@ namespace Junction
         private void SetProdData(DataTable dt)
         {
             int i = 0;
-            int numberOfProducts = 0;
-            if (doGenerateDelay)
-            {
-                foreach (DataRow dr in dt.Rows)
-                {
-                    // Count the number of real products 
-                    string ProdNum = dr["Product Number"].ToString();
-                    if (ProdNum != "9999")
-                    {
-                        numberOfProducts++;
-                    }
-                }
-                numberOfProducts += 1;
-            }
-            else
-            {
-                numberOfProducts = dt.Rows.Count;
-            }
+            int numberOfProducts = dt.Rows.Count;
 
             //redimension the arrays to hold the product data
             ProductName = new string[numberOfProducts];
@@ -938,10 +918,6 @@ namespace Junction
             {
                 ProductName[i] = (string)dr["Product Name"]; //Read in the product name
                 string ProdNum = dr["Product Number"].ToString();
-                if (doGenerateDelay & ProdNum == "9999")
-                {
-                    break;
-                }
 
                 ProductNumberHash.Add(dr["Product Number"].ToString(), i);
                 if (dr.IsNull(4))
@@ -1219,30 +1195,12 @@ namespace Junction
             {
                 throw new ApplicationException("Order Data Set cannot be initialized. The Resources Data Table must be initialized first.\r\n");
             }
-            // If we want to generate delay jobs on the fly instead of reading them from the input spreadsheet
             // Note: "NumberOfRealJobs" is misleading.
             // It is the number of actual orders with real products + number of delay jobs, whether they are generated or in the input spreadsheet. 
             int SlackJobs, TotalJobs;
             int numberOfDelayJobs = 0;
             NumberOfRealJobs = 0;
-            if (doGenerateDelay)
-            {
-                foreach (DataRow dr in dt.Rows)
-                {
-                    // Count the number of real jobs. Generate the number of delay jobs
-                    string ProdNum = dr["Product Number"].ToString();
-                    if (ProdNum != "9999")
-                    {
-                        NumberOfRealJobs++;
-                    }
-                }
-                numberOfDelayJobs = NumberOfRealJobs * 6;
-                NumberOfRealJobs = NumberOfRealJobs + numberOfDelayJobs;
-            }
-            else
-            {
-                NumberOfRealJobs = masterData.Tables["Orders"].Rows.Count;
-            }
+            NumberOfRealJobs = masterData.Tables["Orders"].Rows.Count;
             SlackJobs = (NumberOfRealJobs * NumberOfResources) - NumberOfRealJobs;
             TotalJobs = NumberOfRealJobs + SlackJobs;
 
@@ -1266,10 +1224,6 @@ namespace Junction
                 try
                 {
                     string ProdNum = dr["Product Number"].ToString();
-                    if (doGenerateDelay & ProdNum == "9999")
-                    {
-                        break;
-                    }
                     int ProdIndex = (int)ProductNumberHash[ProdNum];
                     OrderQty[i] = (double)dr["Quantity"];
                     JobsToSchedule[i] = ProdIndex;
@@ -1348,28 +1302,6 @@ namespace Junction
             }
 
             avgJobRunTime = avgJobRunTime / (NumberOfRealJobs - numberOfDelayJobs);
-            // Set up the generated delayjobs 
-            if (doGenerateDelay)
-            {
-                for (int j = NumberOfRealJobs - numberOfDelayJobs; j < NumberOfRealJobs; j++)
-                {
-                    int ProdIndex = (int)ProductNumberHash["9999"];
-                    OrderQty[j] = 1;
-                    JobsToSchedule[j] = ProdIndex;
-
-                    JobRunTime[j] = avgJobRunTime;
-
-                    // Load the order late cost penalties
-                    MinLateCost[j] = 0;
-                    MaxLateCost[j] = 0;
-                    LateCostPerHour[j] = 0;
-                    // Load the order early cost penalties
-                    MinEarlyCost[j] = 0;
-                    MaxEarlyCost[j] = 0;
-                    EarlyCostPerHour[j] = 0;
-                }
-
-            }
             //Set up the Slack Jobs
             if (TotalJobs > NumberOfRealJobs)
             {
@@ -1392,23 +1324,7 @@ namespace Junction
                 output[modes[i] * NumberOfRealJobs + used[modes[i]]] = i;
                 used[modes[i]]++;
             }
-            /*
-            for (int i = 0; i < NumberOfResources; i++)
-            {
-                for (int j = 0; j < NumberOfRealJobs; j++)
-                {
-                    if (modes[j] == i)
-                    {
-                        for (int k = 0; k < NumberOfRealJobs; k++)
-                        {
-                            if (genes[k] == j)
-                            {
-                                output[i * NumberOfResources + k] = j;
-                            }
-                        }
-                    }
-                }
-            }*/
+
         }
         private static double CalcFitness(int[] genes, double[] delayTimes, int[] modes)
         {
