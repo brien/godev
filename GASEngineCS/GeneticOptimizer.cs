@@ -108,9 +108,9 @@ namespace Junction
                 }
 
             }
-            public void SeedPopulation(int[] genes, double[] times)
+            public void SeedPopulation(int[] genes, double[] times, int[] modes)
             {
-                population[0] = new ScheduleGenome(_length, _tl, _mModes, _mutationRate, genes, times);
+                population[0] = new ScheduleGenome(_length, _tl, _mModes, _mutationRate, genes, times, modes);
             }
             public double AverageFitness()
             {
@@ -352,7 +352,7 @@ namespace Junction
                 public RealCrossoverOp realCrossover;
 
 
-                public ScheduleGenome(int length, int tl, int mModes, double mut, int[] geneSeeds, double[] timeSeeds)
+                public ScheduleGenome(int length, int tl, int mModes, double mut, int[] geneSeeds, double[] timeSeeds, int[] modeSeeds)
                 {
                     _length = length;
                     Genes = new int[length];
@@ -368,6 +368,10 @@ namespace Junction
                     for (int i = 0; i < tl; i++)
                     {
                         Times[i] = timeSeeds[i];
+                    }
+                    for (int i = 0; i < tl; i++)
+                    {
+                        Modes[i] = modeSeeds[i];
                     }
                     fitness = -1;
                 }

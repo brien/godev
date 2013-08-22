@@ -105,6 +105,7 @@ namespace Junction
         public GeneticOptimizer.GA CGA;
         private int[] Genes;
         private double[] Times;
+        private int[] Modes;
         public bool seededRun;
 
         private static int NumberOfRealJobs;
@@ -745,10 +746,7 @@ namespace Junction
             int seed;
             seed = Environment.TickCount;
 
-
-
-
-            //    display the status form
+            // display the status form
             StatusForm frmStatus = new StatusForm();
             if (ShowStatusWhileRunning)
             {
@@ -764,7 +762,7 @@ namespace Junction
             CGA = new GeneticOptimizer.GA(seed, NumberOfRealJobs, NumberOfRealJobs, NumberOfResources, popsize, popsize, mutarate, DeathRate / 100.0, delayRate, meanDelayTime);
             if (seededRun)
             {
-                CGA.SeedPopulation(Genes, Times);
+                CGA.SeedPopulation(Genes, Times, Modes);
             }
             CGA.survivalSelection = survivalMode;
             CGA.parentSelection = parentMode;
@@ -963,13 +961,15 @@ namespace Junction
             {
                 int NumJobs = JobsToSchedule.GetUpperBound(0) + 1;
                 Genes = new int[NumJobs];
-                Times = new double[NumJobs];
+                Times = new double[NumberOfRealJobs];
+                Modes = new int[NumJobs];
                 int i = 0;
                 foreach (DataRow dr in dt.Rows)
                 {
                     Genes[i] = (int)(double)dr["Genes"];
                     if (i < NumberOfRealJobs)
                     {
+                        Modes[i] = (int)(double)dr["Mode"];
                         Times[i] = (double)dr["DelayTime"];
                     }
                     i++;
