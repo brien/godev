@@ -455,6 +455,7 @@
             this.btnSelectStartingSchedule.TabIndex = 19;
             this.btnSelectStartingSchedule.Text = "Browse";
             this.btnSelectStartingSchedule.UseVisualStyleBackColor = true;
+            this.btnSelectStartingSchedule.Click += new System.EventHandler(this.btnSelectStartingSchedule_Click);
             // 
             // btnSelectSpreadSheet
             // 
