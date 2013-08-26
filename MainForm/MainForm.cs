@@ -26,55 +26,9 @@ namespace MainForm
 
         private void btnSolve_Click(object sender, EventArgs e)
         {
-            // this.GAS = new Junction.GeneticAlgorithmSchedulingCS();
             // Turn on the wait cursor
             Cursor = Cursors.WaitCursor;
-            // Dim EA As New Junction.ExcelAutomation
 
-            // Dim dr As DataRow
-
-            // Initialize the properties
-            this.GAS.ShowStatusWhileRunning = cbShowStatus.Checked;
-            //.LateCost = CDbl(tbLateCost.Text) / 60;
-            this.GAS.WashTime = Convert.ToDouble(tbWashTime.Text) / 60;
-            Junction.GeneticAlgorithmSchedulingCS.BOMPenaltyCost = Convert.ToDouble(tbComponentShortagePenalty.Text);
-            Junction.GeneticAlgorithmSchedulingCS.ResourceNotFeasible = Convert.ToDouble(tbLineInfeasibility.Text);
-            this.GAS.ResourcePref = Convert.ToDouble(tbLineAffinity.Text);
-
-            this.GAS.meanDelayTime = Convert.ToDouble(tbMeanDelay.Text);
-            this.GAS.delayRate = Convert.ToDouble(tbDelayProb.Text);
-            if (rbStruggle.Checked)
-            {
-                this.GAS.survivalMode = Junction.GeneticOptimizer.SurvivalSelectionOp.Struggle;
-            }
-            else if (rbElitist.Checked)
-            {
-                this.GAS.survivalMode = Junction.GeneticOptimizer.SurvivalSelectionOp.Elitist;
-            }
-            else if (rbGenerational.Checked)
-            {
-                this.GAS.survivalMode = Junction.GeneticOptimizer.SurvivalSelectionOp.Generational;
-            }
-            else if (rbReplaceWorst.Checked)
-            {
-                this.GAS.survivalMode = Junction.GeneticOptimizer.SurvivalSelectionOp.ReplaceWorst;
-            }
-            if (rbFitnessProportional.Checked)
-            {
-                this.GAS.parentMode = Junction.GeneticOptimizer.ParentSelectionOp.FitnessProportional;
-            }
-            else if (rbTournament.Checked)
-            {
-                this.GAS.parentMode = Junction.GeneticOptimizer.ParentSelectionOp.Tournament;
-            }
-            if (rbUniform.Checked)
-            {
-                this.GAS.realCrossoverMode = Junction.GeneticOptimizer.RealCrossoverOp.Uniform;
-            }
-            else if (rbMeanWithNoise.Checked)
-            {
-                this.GAS.realCrossoverMode = Junction.GeneticOptimizer.RealCrossoverOp.MeanWithNoise;
-            }
             // The next section of code loads worksheets into multiple data tables within a single data set
             // The dataset is then passed to the scheduler via the GAS.Masterdata Property.
             // Create a master data set with line, product, changeover, and order data in it.
@@ -98,6 +52,55 @@ namespace MainForm
             // Send the complete dataset to the scheduler
             this.GAS.MasterData = ds2;
 
+
+            // Initialize the properties
+            this.GAS.ShowStatusWhileRunning = cbShowStatus.Checked;
+            //.LateCost = CDbl(tbLateCost.Text) / 60;
+            this.GAS.WashTime = Convert.ToDouble(tbWashTime.Text) / 60;
+            Junction.GeneticAlgorithmSchedulingCS.BOMPenaltyCost = Convert.ToDouble(tbComponentShortagePenalty.Text);
+            Junction.GeneticAlgorithmSchedulingCS.ResourceNotFeasible = Convert.ToDouble(tbLineInfeasibility.Text);
+            this.GAS.ResourcePref = Convert.ToDouble(tbLineAffinity.Text);
+
+            int populationSize = Convert.ToInt32(tbHerdSize.Text);
+            int numberOfGenerations = Convert.ToInt32(tbGenerations.Text);
+            double mutationRate = Convert.ToDouble(tbMutationProbability.Text);
+            double deathRate = Convert.ToDouble(tbDeathRate.Text);
+
+            this.GAS.meanDelayTime = Convert.ToDouble(tbMeanDelay.Text);
+            this.GAS.delayRate = Convert.ToDouble(tbDelayProb.Text);
+            this.GAS.InitializeGA(populationSize, numberOfGenerations, mutationRate, deathRate);
+            if (rbStruggle.Checked)
+            {
+                this.GAS.CGA.survivalSelection = Junction.GeneticOptimizer.SurvivalSelectionOp.Struggle;
+            }
+            else if (rbElitist.Checked)
+            {
+                this.GAS.CGA.survivalSelection= Junction.GeneticOptimizer.SurvivalSelectionOp.Elitist;
+            }
+            else if (rbGenerational.Checked)
+            {
+                this.GAS.CGA.survivalSelection = Junction.GeneticOptimizer.SurvivalSelectionOp.Generational;
+            }
+            else if (rbReplaceWorst.Checked)
+            {
+                this.GAS.CGA.survivalSelection = Junction.GeneticOptimizer.SurvivalSelectionOp.ReplaceWorst;
+            }
+            if (rbFitnessProportional.Checked)
+            {
+                this.GAS.CGA.parentSelection = Junction.GeneticOptimizer.ParentSelectionOp.FitnessProportional;
+            }
+            else if (rbTournament.Checked)
+            {
+                this.GAS.CGA.parentSelection = Junction.GeneticOptimizer.ParentSelectionOp.Tournament;
+            }
+            if (rbUniform.Checked)
+            {
+                this.GAS.CGA.realCrossover = Junction.GeneticOptimizer.RealCrossoverOp.Uniform;
+            }
+            else if (rbMeanWithNoise.Checked)
+            {
+                this.GAS.CGA.realCrossover = Junction.GeneticOptimizer.RealCrossoverOp.MeanWithNoise;
+            }
             /*
             Catch exp As Exception
                 ' Will catch any error that we're not explicitly trapping.
@@ -120,8 +123,7 @@ namespace MainForm
 
             try
             {
-                lblResult.Text = String.Format("{0: #,###.00}", GAS.Schedule(Convert.ToDouble(tbMutationProbability.Text), Convert.ToInt32(tbGenerations.Text)
-                                          , Convert.ToDouble(tbDeathRate.Text), Convert.ToInt32(tbHerdSize.Text)));
+                lblResult.Text = String.Format("{0: #,###.00}", GAS.Schedule(mutationRate,numberOfGenerations, deathRate, populationSize));
             }
             catch (Exception ex)
             {

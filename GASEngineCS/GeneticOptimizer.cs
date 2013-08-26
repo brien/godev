@@ -50,7 +50,7 @@ namespace Junction
     /// </summary>
     namespace GeneticOptimizer
     {
-        // Genetic Operator Flags:
+        // Genetic Operator Flag type definitions:
         public enum RealCrossoverOp { Uniform, MeanWithNoise }
         public enum SurvivalSelectionOp { ReplaceWorst, Elitist, Generational, Struggle }
         public enum ParentSelectionOp { Tournament, FitnessProportional }
