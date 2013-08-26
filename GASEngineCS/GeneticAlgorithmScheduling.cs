@@ -727,8 +727,6 @@ namespace Junction
 
         public void InitializeGA(int populationSize, int numberOfGenerations, double mutationRate, double replacementRate)
         {
-            randomSeed = Environment.TickCount;
-
             CGA = new GeneticOptimizer.GA(randomSeed, NumberOfRealJobs, NumberOfRealJobs, NumberOfResources, populationSize, populationSize, mutationRate, replacementRate / 100.0, delayRate, meanDelayTime);
         }
 

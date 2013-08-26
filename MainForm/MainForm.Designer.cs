@@ -119,6 +119,8 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dgvSchedule = new System.Windows.Forms.DataGridView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tbRandomSeed = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GroupBox7.SuspendLayout();
@@ -503,6 +505,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Controls.Add(this.tbRandomSeed);
             this.tabPage2.Controls.Add(this.GroupBox10);
             this.tabPage2.Controls.Add(this.GroupBox9);
             this.tabPage2.Controls.Add(this.gbSurvival);
@@ -1083,6 +1087,22 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(144, 300);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 13);
+            this.label4.TabIndex = 60;
+            this.label4.Text = "RNG Seed";
+            // 
+            // tbRandomSeed
+            // 
+            this.tbRandomSeed.Location = new System.Drawing.Point(147, 316);
+            this.tbRandomSeed.Name = "tbRandomSeed";
+            this.tbRandomSeed.Size = new System.Drawing.Size(100, 20);
+            this.tbRandomSeed.TabIndex = 59;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1218,6 +1238,8 @@
         internal System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button btnOutputToExcel;
+        internal System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.TextBox tbRandomSeed;
     }
 }
 
