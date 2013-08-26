@@ -37,11 +37,10 @@ namespace Junction
 
         // The mean of the delay times:
         public double meanDelayTime;
-        // The rate at which delay times are generated (probablilty of non-zero delay time)
+        // The rate at which delay times are generated (probablilty of non-zero delay time):
         public double delayRate;
-        public Junction.GeneticOptimizer.SurvivalSelectionOp survivalMode;
-        public Junction.GeneticOptimizer.RealCrossoverOp realCrossoverMode;
-        public Junction.GeneticOptimizer.ParentSelectionOp parentMode;
+        // The number used to seed the random number generator:
+        public int randomSeed;
         // Just for debugging purposes:
         static bool shouldBreak = false;
 
@@ -726,6 +725,13 @@ namespace Junction
             GAResult.Tables.Add(dt2);
         }
 
+        public void InitializeGA(int populationSize, int numberOfGenerations, double mutationRate, double replacementRate)
+        {
+            randomSeed = Environment.TickCount;
+
+            CGA = new GeneticOptimizer.GA(randomSeed, NumberOfRealJobs, NumberOfRealJobs, NumberOfResources, populationSize, populationSize, mutationRate, replacementRate / 100.0, delayRate, meanDelayTime);
+        }
+
         // This is the main method invoked to begin the scheduling process
         public double Schedule(double MutationProbability, int NumberOfGenerations, double DeathRate, int PopulationSize)
         {
@@ -743,9 +749,6 @@ namespace Junction
             //bool Stopped = false; //Allow for interruption of a scheduling run
             IsFeasible = false;
 
-            int seed;
-            seed = Environment.TickCount;
-
             // display the status form
             StatusForm frmStatus = new StatusForm();
             if (ShowStatusWhileRunning)
@@ -759,14 +762,13 @@ namespace Junction
             int popsize = PopulationSize;
             double mutarate = MutationProbability;
 
-            CGA = new GeneticOptimizer.GA(seed, NumberOfRealJobs, NumberOfRealJobs, NumberOfResources, popsize, popsize, mutarate, DeathRate / 100.0, delayRate, meanDelayTime);
             if (seededRun)
             {
                 CGA.SeedPopulation(Genes, Times, Modes);
             }
-            CGA.survivalSelection = survivalMode;
-            CGA.parentSelection = parentMode;
-            CGA.realCrossover = realCrossoverMode;
+            //CGA.survivalSelection = survivalMode;
+            //CGA.parentSelection = parentMode;
+            //CGA.realCrossover = realCrossoverMode;
             CGA.FitnessFunction = CalcFitness;
             CGA.EvaluatePopulation();
             for (int i = 0; i < NumberOfGenerations; i++)
@@ -803,7 +805,7 @@ namespace Junction
             {
                 Debug.Write(Environment.NewLine + CGA.elite.Genes[i] + "  " + CGA.elite.Times[i]);
             }*/
-            Debug.Write(Environment.NewLine + "Random Seed = " + seed);
+            Debug.Write(Environment.NewLine + "Random Seed = " + randomSeed);
             // Create a data table with the best schedule
             CreateScheduleDataTable(CGA.elite.Genes, CGA.elite.Times, CGA.elite.Modes);
             shouldBreak = true;
