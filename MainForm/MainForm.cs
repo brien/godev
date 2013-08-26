@@ -13,6 +13,7 @@ namespace MainForm
 {
     public partial class MainForm : Form
     {
+        public GanttChart gantt;
         public Junction.GeneticAlgorithmSchedulingCS GAS;
         public MainForm()
         {
@@ -21,7 +22,8 @@ namespace MainForm
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            this.GAS = new Junction.GeneticAlgorithmSchedulingCS();
+            this.GAS = new Junction.GeneticAlgorithmSchedulingCS();
+
         }
 
         private void btnSolve_Click(object sender, EventArgs e)
@@ -161,6 +163,25 @@ namespace MainForm
             dgvSchedule.AutoResizeColumn(3, DataGridViewAutoSizeColumnMode.AllCells);
             dgvSchedule.AutoResizeColumn(4, DataGridViewAutoSizeColumnMode.AllCells);
             dgvSchedule.AutoSize = true;
+
+            ganttChart1.FromDate = DateTime.Today;
+
+            ganttChart1.ToDate = new DateTime(2013, 8, 31);//DateTime.Today + new DateTime(0, 0, 14);
+            DataTable sdt = GAS.ScheduleDataSet.Tables[0];
+            foreach (DataRow dr in sdt.Rows)
+            {
+                DateTime EndTime = (DateTime)dr["End Time"];
+                DateTime StartTime = (DateTime)dr["Start Time"];
+                double Setup = (double)dr["Setup Time"];
+                double RunTime = (double)dr["Run Time"];
+                string ProductionLine = dr["Resource Number"].ToString();
+                int resourceNumber = Convert.ToInt32(ProductionLine);
+                string ProductName = (string)dr["Product Name"];
+                ganttChart1.AddChartBar("Resource " + ProductionLine, null, StartTime, EndTime, Color.Aqua, Color.Khaki, resourceNumber);
+
+                ganttChart1.Visible = true;
+                ganttChart1.PaintChart();
+            }
         }
         private void AddExcelTableToMasterData(ref DataSet ds2, string bookName, string sheetName)
         {

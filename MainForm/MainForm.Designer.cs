@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnOutputToExcel = new System.Windows.Forms.Button();
@@ -119,6 +120,8 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dgvSchedule = new System.Windows.Forms.DataGridView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.ganttChart1 = new GanttChart();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GroupBox7.SuspendLayout();
@@ -136,6 +139,7 @@
             this.GroupBox2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSchedule)).BeginInit();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -144,6 +148,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -1083,6 +1088,34 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.ganttChart1);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(824, 523);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Gantt Chart";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // ganttChart1
+            // 
+            this.ganttChart1.AllowManualEditBar = false;
+            this.ganttChart1.DateFont = new System.Drawing.Font("Verdana", 8F);
+            this.ganttChart1.FromDate = new System.DateTime(((long)(0)));
+            this.ganttChart1.Location = new System.Drawing.Point(0, 32);
+            this.ganttChart1.Name = "ganttChart1";
+            this.ganttChart1.RowFont = new System.Drawing.Font("Verdana", 8F);
+            this.ganttChart1.Size = new System.Drawing.Size(821, 282);
+            this.ganttChart1.TabIndex = 42;
+            this.ganttChart1.Text = "ganttChart1";
+            this.ganttChart1.TimeFont = new System.Drawing.Font("Verdana", 8F);
+            this.ganttChart1.ToDate = new System.DateTime(((long)(0)));
+            this.ganttChart1.ToolTipText = ((System.Collections.Generic.List<string>)(resources.GetObject("ganttChart1.ToolTipText")));
+            this.ganttChart1.ToolTipTextTitle = "";
+            this.ganttChart1.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1121,6 +1154,7 @@
             this.GroupBox2.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSchedule)).EndInit();
+            this.tabPage5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1218,6 +1252,8 @@
         internal System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button btnOutputToExcel;
+        private System.Windows.Forms.TabPage tabPage5;
+        private GanttChart ganttChart1;
     }
 }
 

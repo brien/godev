@@ -82,6 +82,10 @@
       <Project>{cade5607-08dd-4bc6-9377-8c65e55685ce}</Project>
       <Name>ExcelAutomation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GanttControl\GanttControl.csproj">
+      <Project>{e6770d30-d888-402c-b5b7-35970a5f95ea}</Project>
+      <Name>GanttControl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GASEngineCS\GASEngineCS.csproj">
       <Project>{fd65edfe-e299-4474-91e5-32c9587c2224}</Project>
       <Name>GASEngineCS</Name>
