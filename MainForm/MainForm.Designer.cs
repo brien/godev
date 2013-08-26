@@ -530,9 +530,9 @@
             // 
             this.GroupBox10.Controls.Add(this.rbMeanWithNoise);
             this.GroupBox10.Controls.Add(this.rbUniform);
-            this.GroupBox10.Location = new System.Drawing.Point(380, 170);
+            this.GroupBox10.Location = new System.Drawing.Point(141, 204);
             this.GroupBox10.Name = "GroupBox10";
-            this.GroupBox10.Size = new System.Drawing.Size(136, 85);
+            this.GroupBox10.Size = new System.Drawing.Size(136, 66);
             this.GroupBox10.TabIndex = 58;
             this.GroupBox10.TabStop = false;
             this.GroupBox10.Text = "Delay Times Crossover";
@@ -541,7 +541,7 @@
             // 
             this.rbMeanWithNoise.AutoSize = true;
             this.rbMeanWithNoise.Checked = true;
-            this.rbMeanWithNoise.Location = new System.Drawing.Point(6, 19);
+            this.rbMeanWithNoise.Location = new System.Drawing.Point(6, 17);
             this.rbMeanWithNoise.Name = "rbMeanWithNoise";
             this.rbMeanWithNoise.Size = new System.Drawing.Size(104, 17);
             this.rbMeanWithNoise.TabIndex = 1;
@@ -552,7 +552,7 @@
             // rbUniform
             // 
             this.rbUniform.AutoSize = true;
-            this.rbUniform.Location = new System.Drawing.Point(6, 42);
+            this.rbUniform.Location = new System.Drawing.Point(6, 40);
             this.rbUniform.Name = "rbUniform";
             this.rbUniform.Size = new System.Drawing.Size(61, 17);
             this.rbUniform.TabIndex = 0;
@@ -563,9 +563,9 @@
             // 
             this.GroupBox9.Controls.Add(this.rbTournament);
             this.GroupBox9.Controls.Add(this.rbFitnessProportional);
-            this.GroupBox9.Location = new System.Drawing.Point(380, 79);
+            this.GroupBox9.Location = new System.Drawing.Point(141, 129);
             this.GroupBox9.Name = "GroupBox9";
-            this.GroupBox9.Size = new System.Drawing.Size(121, 85);
+            this.GroupBox9.Size = new System.Drawing.Size(121, 69);
             this.GroupBox9.TabIndex = 57;
             this.GroupBox9.TabStop = false;
             this.GroupBox9.Text = "Parent Selection";
@@ -574,7 +574,7 @@
             // 
             this.rbTournament.AutoSize = true;
             this.rbTournament.Checked = true;
-            this.rbTournament.Location = new System.Drawing.Point(6, 52);
+            this.rbTournament.Location = new System.Drawing.Point(6, 42);
             this.rbTournament.Name = "rbTournament";
             this.rbTournament.Size = new System.Drawing.Size(82, 17);
             this.rbTournament.TabIndex = 1;
@@ -585,7 +585,7 @@
             // rbFitnessProportional
             // 
             this.rbFitnessProportional.AutoSize = true;
-            this.rbFitnessProportional.Location = new System.Drawing.Point(6, 28);
+            this.rbFitnessProportional.Location = new System.Drawing.Point(6, 19);
             this.rbFitnessProportional.Name = "rbFitnessProportional";
             this.rbFitnessProportional.Size = new System.Drawing.Size(117, 17);
             this.rbFitnessProportional.TabIndex = 0;
@@ -598,9 +598,9 @@
             this.gbSurvival.Controls.Add(this.rbStruggle);
             this.gbSurvival.Controls.Add(this.rbGenerational);
             this.gbSurvival.Controls.Add(this.rbElitist);
-            this.gbSurvival.Location = new System.Drawing.Point(250, 79);
+            this.gbSurvival.Location = new System.Drawing.Point(11, 129);
             this.gbSurvival.Name = "gbSurvival";
-            this.gbSurvival.Size = new System.Drawing.Size(115, 125);
+            this.gbSurvival.Size = new System.Drawing.Size(115, 120);
             this.gbSurvival.TabIndex = 56;
             this.gbSurvival.TabStop = false;
             this.gbSurvival.Text = "Survival Selection";
@@ -608,7 +608,7 @@
             // rbReplaceWorst
             // 
             this.rbReplaceWorst.AutoSize = true;
-            this.rbReplaceWorst.Location = new System.Drawing.Point(18, 75);
+            this.rbReplaceWorst.Location = new System.Drawing.Point(6, 65);
             this.rbReplaceWorst.Name = "rbReplaceWorst";
             this.rbReplaceWorst.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.rbReplaceWorst.Size = new System.Drawing.Size(93, 17);
@@ -619,7 +619,7 @@
             // rbStruggle
             // 
             this.rbStruggle.AutoSize = true;
-            this.rbStruggle.Location = new System.Drawing.Point(18, 52);
+            this.rbStruggle.Location = new System.Drawing.Point(6, 42);
             this.rbStruggle.Name = "rbStruggle";
             this.rbStruggle.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.rbStruggle.Size = new System.Drawing.Size(64, 17);
@@ -630,7 +630,7 @@
             // rbGenerational
             // 
             this.rbGenerational.AutoSize = true;
-            this.rbGenerational.Location = new System.Drawing.Point(18, 98);
+            this.rbGenerational.Location = new System.Drawing.Point(6, 88);
             this.rbGenerational.Name = "rbGenerational";
             this.rbGenerational.Size = new System.Drawing.Size(85, 17);
             this.rbGenerational.TabIndex = 1;
@@ -641,7 +641,7 @@
             // 
             this.rbElitist.AutoSize = true;
             this.rbElitist.Checked = true;
-            this.rbElitist.Location = new System.Drawing.Point(18, 29);
+            this.rbElitist.Location = new System.Drawing.Point(6, 19);
             this.rbElitist.Name = "rbElitist";
             this.rbElitist.Size = new System.Drawing.Size(49, 17);
             this.rbElitist.TabIndex = 0;
@@ -652,7 +652,7 @@
             // Label26
             // 
             this.Label26.AutoSize = true;
-            this.Label26.Location = new System.Drawing.Point(8, 248);
+            this.Label26.Location = new System.Drawing.Point(8, 342);
             this.Label26.Name = "Label26";
             this.Label26.Size = new System.Drawing.Size(130, 13);
             this.Label26.TabIndex = 55;
@@ -661,7 +661,7 @@
             // Label23
             // 
             this.Label23.AutoSize = true;
-            this.Label23.Location = new System.Drawing.Point(8, 206);
+            this.Label23.Location = new System.Drawing.Point(8, 300);
             this.Label23.Name = "Label23";
             this.Label23.Size = new System.Drawing.Size(85, 13);
             this.Label23.TabIndex = 54;
@@ -669,7 +669,7 @@
             // 
             // tbMeanDelay
             // 
-            this.tbMeanDelay.Location = new System.Drawing.Point(11, 264);
+            this.tbMeanDelay.Location = new System.Drawing.Point(11, 358);
             this.tbMeanDelay.Name = "tbMeanDelay";
             this.tbMeanDelay.Size = new System.Drawing.Size(100, 20);
             this.tbMeanDelay.TabIndex = 53;
@@ -677,7 +677,7 @@
             // 
             // tbDelayProb
             // 
-            this.tbDelayProb.Location = new System.Drawing.Point(11, 222);
+            this.tbDelayProb.Location = new System.Drawing.Point(11, 316);
             this.tbDelayProb.Name = "tbDelayProb";
             this.tbDelayProb.Size = new System.Drawing.Size(100, 20);
             this.tbDelayProb.TabIndex = 52;
@@ -686,7 +686,7 @@
             // Label9
             // 
             this.Label9.AutoSize = true;
-            this.Label9.Location = new System.Drawing.Point(8, 128);
+            this.Label9.Location = new System.Drawing.Point(138, 75);
             this.Label9.Name = "Label9";
             this.Label9.Size = new System.Drawing.Size(81, 13);
             this.Label9.TabIndex = 51;
@@ -694,7 +694,7 @@
             // 
             // tbDeathRate
             // 
-            this.tbDeathRate.Location = new System.Drawing.Point(11, 144);
+            this.tbDeathRate.Location = new System.Drawing.Point(141, 91);
             this.tbDeathRate.Name = "tbDeathRate";
             this.tbDeathRate.Size = new System.Drawing.Size(100, 20);
             this.tbDeathRate.TabIndex = 50;
@@ -703,7 +703,7 @@
             // Label2
             // 
             this.Label2.AutoSize = true;
-            this.Label2.Location = new System.Drawing.Point(8, 79);
+            this.Label2.Location = new System.Drawing.Point(8, 23);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(116, 13);
             this.Label2.TabIndex = 47;
@@ -711,7 +711,7 @@
             // 
             // tbGenerations
             // 
-            this.tbGenerations.Location = new System.Drawing.Point(11, 95);
+            this.tbGenerations.Location = new System.Drawing.Point(11, 39);
             this.tbGenerations.Name = "tbGenerations";
             this.tbGenerations.Size = new System.Drawing.Size(100, 20);
             this.tbGenerations.TabIndex = 46;
@@ -720,7 +720,7 @@
             // Label8
             // 
             this.Label8.AutoSize = true;
-            this.Label8.Location = new System.Drawing.Point(130, 79);
+            this.Label8.Location = new System.Drawing.Point(138, 23);
             this.Label8.Name = "Label8";
             this.Label8.Size = new System.Drawing.Size(109, 13);
             this.Label8.TabIndex = 49;
@@ -729,7 +729,7 @@
             // Label1
             // 
             this.Label1.AutoSize = true;
-            this.Label1.Location = new System.Drawing.Point(8, 3);
+            this.Label1.Location = new System.Drawing.Point(8, 75);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(99, 13);
             this.Label1.TabIndex = 45;
@@ -737,7 +737,7 @@
             // 
             // tbHerdSize
             // 
-            this.tbHerdSize.Location = new System.Drawing.Point(130, 95);
+            this.tbHerdSize.Location = new System.Drawing.Point(138, 39);
             this.tbHerdSize.Name = "tbHerdSize";
             this.tbHerdSize.Size = new System.Drawing.Size(100, 20);
             this.tbHerdSize.TabIndex = 48;
@@ -745,7 +745,7 @@
             // 
             // tbMutationProbability
             // 
-            this.tbMutationProbability.Location = new System.Drawing.Point(11, 19);
+            this.tbMutationProbability.Location = new System.Drawing.Point(11, 91);
             this.tbMutationProbability.Name = "tbMutationProbability";
             this.tbMutationProbability.Size = new System.Drawing.Size(100, 20);
             this.tbMutationProbability.TabIndex = 44;
