@@ -61,6 +61,15 @@ namespace MainForm
             Junction.GeneticAlgorithmSchedulingCS.ResourceNotFeasible = Convert.ToDouble(tbLineInfeasibility.Text);
             this.GAS.ResourcePref = Convert.ToDouble(tbLineAffinity.Text);
 
+            if (tbRandomSeed.Text != "")
+            {
+                this.GAS.randomSeed = Convert.ToInt32(tbRandomSeed.Text);
+            }
+            else
+            {
+                this.GAS.randomSeed = Environment.TickCount;
+            }
+
             int populationSize = Convert.ToInt32(tbHerdSize.Text);
             int numberOfGenerations = Convert.ToInt32(tbGenerations.Text);
             double mutationRate = Convert.ToDouble(tbMutationProbability.Text);
