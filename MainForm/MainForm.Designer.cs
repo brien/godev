@@ -167,7 +167,7 @@
             // 
             // btnOutputToExcel
             // 
-            this.btnOutputToExcel.Location = new System.Drawing.Point(402, 426);
+            this.btnOutputToExcel.Location = new System.Drawing.Point(596, 207);
             this.btnOutputToExcel.Name = "btnOutputToExcel";
             this.btnOutputToExcel.Size = new System.Drawing.Size(94, 27);
             this.btnOutputToExcel.TabIndex = 40;
@@ -187,9 +187,9 @@
             this.GroupBox7.Controls.Add(this.lblLateJobsLine);
             this.GroupBox7.Controls.Add(this.Label6);
             this.GroupBox7.Controls.Add(this.lblEarlyStartViolations);
-            this.GroupBox7.Location = new System.Drawing.Point(376, 206);
+            this.GroupBox7.Location = new System.Drawing.Point(587, 16);
             this.GroupBox7.Name = "GroupBox7";
-            this.GroupBox7.Size = new System.Drawing.Size(260, 192);
+            this.GroupBox7.Size = new System.Drawing.Size(205, 171);
             this.GroupBox7.TabIndex = 39;
             this.GroupBox7.TabStop = false;
             this.GroupBox7.Text = "Constraint Violations";
@@ -197,17 +197,17 @@
             // lblBOMViolations
             // 
             this.lblBOMViolations.AutoSize = true;
-            this.lblBOMViolations.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBOMViolations.Location = new System.Drawing.Point(124, 159);
+            this.lblBOMViolations.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBOMViolations.Location = new System.Drawing.Point(115, 118);
             this.lblBOMViolations.Name = "lblBOMViolations";
-            this.lblBOMViolations.Size = new System.Drawing.Size(18, 20);
+            this.lblBOMViolations.Size = new System.Drawing.Size(13, 13);
             this.lblBOMViolations.TabIndex = 38;
             this.lblBOMViolations.Text = "0";
             // 
             // Label5
             // 
             this.Label5.AutoSize = true;
-            this.Label5.Location = new System.Drawing.Point(19, 159);
+            this.Label5.Location = new System.Drawing.Point(6, 118);
             this.Label5.Name = "Label5";
             this.Label5.Size = new System.Drawing.Size(79, 13);
             this.Label5.TabIndex = 37;
@@ -216,36 +216,36 @@
             // Label24
             // 
             this.Label24.AutoSize = true;
-            this.Label24.Location = new System.Drawing.Point(18, 62);
+            this.Label24.Location = new System.Drawing.Point(6, 52);
             this.Label24.Name = "Label24";
-            this.Label24.Size = new System.Drawing.Size(92, 13);
+            this.Label24.Size = new System.Drawing.Size(98, 13);
             this.Label24.TabIndex = 27;
-            this.Label24.Text = "Late Jobs-Service";
+            this.Label24.Text = "Late Jobs - Service";
             // 
             // lblResourceViolations
             // 
             this.lblResourceViolations.AutoSize = true;
-            this.lblResourceViolations.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResourceViolations.Location = new System.Drawing.Point(124, 126);
+            this.lblResourceViolations.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResourceViolations.Location = new System.Drawing.Point(115, 96);
             this.lblResourceViolations.Name = "lblResourceViolations";
-            this.lblResourceViolations.Size = new System.Drawing.Size(18, 20);
+            this.lblResourceViolations.Size = new System.Drawing.Size(13, 13);
             this.lblResourceViolations.TabIndex = 36;
             this.lblResourceViolations.Text = "0";
             // 
             // lblLateJobsService
             // 
             this.lblLateJobsService.AutoSize = true;
-            this.lblLateJobsService.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLateJobsService.Location = new System.Drawing.Point(125, 62);
+            this.lblLateJobsService.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLateJobsService.Location = new System.Drawing.Point(115, 52);
             this.lblLateJobsService.Name = "lblLateJobsService";
-            this.lblLateJobsService.Size = new System.Drawing.Size(18, 20);
+            this.lblLateJobsService.Size = new System.Drawing.Size(13, 13);
             this.lblLateJobsService.TabIndex = 28;
             this.lblLateJobsService.Text = "0";
             // 
             // LineLateJobs
             // 
             this.LineLateJobs.AutoSize = true;
-            this.LineLateJobs.Location = new System.Drawing.Point(19, 30);
+            this.LineLateJobs.Location = new System.Drawing.Point(6, 30);
             this.LineLateJobs.Name = "LineLateJobs";
             this.LineLateJobs.Size = new System.Drawing.Size(82, 13);
             this.LineLateJobs.TabIndex = 31;
@@ -254,7 +254,7 @@
             // Label25
             // 
             this.Label25.AutoSize = true;
-            this.Label25.Location = new System.Drawing.Point(17, 126);
+            this.Label25.Location = new System.Drawing.Point(6, 96);
             this.Label25.Name = "Label25";
             this.Label25.Size = new System.Drawing.Size(101, 13);
             this.Label25.TabIndex = 35;
@@ -263,17 +263,17 @@
             // lblLateJobsLine
             // 
             this.lblLateJobsLine.AutoSize = true;
-            this.lblLateJobsLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLateJobsLine.Location = new System.Drawing.Point(125, 30);
+            this.lblLateJobsLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLateJobsLine.Location = new System.Drawing.Point(115, 30);
             this.lblLateJobsLine.Name = "lblLateJobsLine";
-            this.lblLateJobsLine.Size = new System.Drawing.Size(18, 20);
+            this.lblLateJobsLine.Size = new System.Drawing.Size(13, 13);
             this.lblLateJobsLine.TabIndex = 32;
             this.lblLateJobsLine.Text = "0";
             // 
             // Label6
             // 
             this.Label6.AutoSize = true;
-            this.Label6.Location = new System.Drawing.Point(17, 94);
+            this.Label6.Location = new System.Drawing.Point(6, 74);
             this.Label6.Name = "Label6";
             this.Label6.Size = new System.Drawing.Size(103, 13);
             this.Label6.TabIndex = 33;
@@ -282,10 +282,10 @@
             // lblEarlyStartViolations
             // 
             this.lblEarlyStartViolations.AutoSize = true;
-            this.lblEarlyStartViolations.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEarlyStartViolations.Location = new System.Drawing.Point(124, 94);
+            this.lblEarlyStartViolations.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEarlyStartViolations.Location = new System.Drawing.Point(115, 74);
             this.lblEarlyStartViolations.Name = "lblEarlyStartViolations";
-            this.lblEarlyStartViolations.Size = new System.Drawing.Size(18, 20);
+            this.lblEarlyStartViolations.Size = new System.Drawing.Size(13, 13);
             this.lblEarlyStartViolations.TabIndex = 34;
             this.lblEarlyStartViolations.Text = "0";
             // 
@@ -303,7 +303,7 @@
             this.gbResults.Controls.Add(this.lblResult);
             this.gbResults.Location = new System.Drawing.Point(376, 16);
             this.gbResults.Name = "gbResults";
-            this.gbResults.Size = new System.Drawing.Size(260, 171);
+            this.gbResults.Size = new System.Drawing.Size(205, 171);
             this.gbResults.TabIndex = 38;
             this.gbResults.TabStop = false;
             this.gbResults.Text = "Results";
@@ -311,27 +311,28 @@
             // lblChangeOverTime
             // 
             this.lblChangeOverTime.AutoSize = true;
-            this.lblChangeOverTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChangeOverTime.Location = new System.Drawing.Point(112, 109);
+            this.lblChangeOverTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChangeOverTime.Location = new System.Drawing.Point(115, 91);
             this.lblChangeOverTime.Name = "lblChangeOverTime";
-            this.lblChangeOverTime.Size = new System.Drawing.Size(18, 20);
+            this.lblChangeOverTime.Size = new System.Drawing.Size(13, 13);
             this.lblChangeOverTime.TabIndex = 26;
             this.lblChangeOverTime.Text = "0";
             // 
             // lblRunTime
             // 
             this.lblRunTime.AutoSize = true;
-            this.lblRunTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRunTime.Location = new System.Drawing.Point(112, 83);
+            this.lblRunTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRunTime.Location = new System.Drawing.Point(115, 69);
             this.lblRunTime.Name = "lblRunTime";
-            this.lblRunTime.Size = new System.Drawing.Size(18, 20);
+            this.lblRunTime.Size = new System.Drawing.Size(13, 13);
             this.lblRunTime.TabIndex = 30;
             this.lblRunTime.Text = "0";
             // 
             // Label22
             // 
             this.Label22.AutoSize = true;
-            this.Label22.Location = new System.Drawing.Point(19, 114);
+            this.Label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label22.Location = new System.Drawing.Point(6, 91);
             this.Label22.Name = "Label22";
             this.Label22.Size = new System.Drawing.Size(96, 13);
             this.Label22.TabIndex = 25;
@@ -340,27 +341,28 @@
             // lblTotalTime
             // 
             this.lblTotalTime.AutoSize = true;
-            this.lblTotalTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalTime.Location = new System.Drawing.Point(112, 133);
+            this.lblTotalTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalTime.Location = new System.Drawing.Point(115, 114);
             this.lblTotalTime.Name = "lblTotalTime";
-            this.lblTotalTime.Size = new System.Drawing.Size(18, 20);
+            this.lblTotalTime.Size = new System.Drawing.Size(13, 13);
             this.lblTotalTime.TabIndex = 24;
             this.lblTotalTime.Text = "0";
             // 
             // lblSolveTime
             // 
             this.lblSolveTime.AutoSize = true;
-            this.lblSolveTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSolveTime.Location = new System.Drawing.Point(112, 57);
+            this.lblSolveTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSolveTime.Location = new System.Drawing.Point(115, 49);
             this.lblSolveTime.Name = "lblSolveTime";
-            this.lblSolveTime.Size = new System.Drawing.Size(86, 20);
+            this.lblSolveTime.Size = new System.Drawing.Size(60, 13);
             this.lblSolveTime.TabIndex = 10;
             this.lblSolveTime.Text = "Solve Time";
             // 
             // Label21
             // 
             this.Label21.AutoSize = true;
-            this.Label21.Location = new System.Drawing.Point(19, 88);
+            this.Label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label21.Location = new System.Drawing.Point(6, 69);
             this.Label21.Name = "Label21";
             this.Label21.Size = new System.Drawing.Size(85, 13);
             this.Label21.TabIndex = 29;
@@ -369,7 +371,8 @@
             // Label7
             // 
             this.Label7.AutoSize = true;
-            this.Label7.Location = new System.Drawing.Point(19, 62);
+            this.Label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label7.Location = new System.Drawing.Point(6, 49);
             this.Label7.Name = "Label7";
             this.Label7.Size = new System.Drawing.Size(60, 13);
             this.Label7.TabIndex = 9;
@@ -378,7 +381,8 @@
             // Label20
             // 
             this.Label20.AutoSize = true;
-            this.Label20.Location = new System.Drawing.Point(17, 138);
+            this.Label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label20.Location = new System.Drawing.Point(6, 114);
             this.Label20.Name = "Label20";
             this.Label20.Size = new System.Drawing.Size(57, 13);
             this.Label20.TabIndex = 23;
@@ -387,7 +391,8 @@
             // Label3
             // 
             this.Label3.AutoSize = true;
-            this.Label3.Location = new System.Drawing.Point(19, 32);
+            this.Label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label3.Location = new System.Drawing.Point(6, 28);
             this.Label3.Name = "Label3";
             this.Label3.Size = new System.Drawing.Size(58, 13);
             this.Label3.TabIndex = 7;
@@ -396,10 +401,10 @@
             // lblResult
             // 
             this.lblResult.AutoSize = true;
-            this.lblResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResult.Location = new System.Drawing.Point(112, 32);
+            this.lblResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResult.Location = new System.Drawing.Point(115, 28);
             this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(112, 20);
+            this.lblResult.Size = new System.Drawing.Size(75, 13);
             this.lblResult.TabIndex = 8;
             this.lblResult.Text = "Solution Value";
             // 
@@ -425,7 +430,7 @@
             this.btnSolve.Location = new System.Drawing.Point(281, 138);
             this.btnSolve.Name = "btnSolve";
             this.btnSolve.Size = new System.Drawing.Size(75, 23);
-            this.btnSolve.TabIndex = 19;
+            this.btnSolve.TabIndex = 2;
             this.btnSolve.Text = "Solve";
             this.btnSolve.UseVisualStyleBackColor = true;
             this.btnSolve.Click += new System.EventHandler(this.btnSolve_Click);
@@ -463,7 +468,7 @@
             this.btnSelectSpreadSheet.Location = new System.Drawing.Point(281, 44);
             this.btnSelectSpreadSheet.Name = "btnSelectSpreadSheet";
             this.btnSelectSpreadSheet.Size = new System.Drawing.Size(75, 23);
-            this.btnSelectSpreadSheet.TabIndex = 18;
+            this.btnSelectSpreadSheet.TabIndex = 1;
             this.btnSelectSpreadSheet.Text = "Browse";
             this.btnSelectSpreadSheet.UseVisualStyleBackColor = true;
             this.btnSelectSpreadSheet.Click += new System.EventHandler(this.btnSelectSpreadSheet_Click);
