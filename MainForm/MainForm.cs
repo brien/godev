@@ -125,8 +125,7 @@ namespace MainForm
             // Start the run
             // *************************************************************
             // Set up a timer
-            System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
-            stopwatch.Start();
+            DateTime begin = DateTime.UtcNow;
             // Display the results
             gbResults.Visible = true;
 
@@ -144,9 +143,9 @@ namespace MainForm
 
             // Display the timer
             lblSolveTime.Text = "";
-            stopwatch.Stop();
+            DateTime end = DateTime.UtcNow;
             //ElapsedTime = DateAndTime.Timer - ElapsedTime;
-            lblSolveTime.Text = String.Format("{0: #,###.00}", stopwatch.Elapsed.Seconds + " Seconds");
+            lblSolveTime.Text = String.Format("{0: #,###.00}", (end - begin).Seconds + " Seconds");
             lblChangeOverTime.Text = GAS.ChangeOverTime.ToString("#,###.00") + " Hours";
             lblLateJobsLine.Text = GAS.NumberOfResourceLateJobs.ToString();
             lblLateJobsService.Text = GAS.NumberOfServiceLateJobs.ToString();
