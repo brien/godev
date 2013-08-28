@@ -639,10 +639,10 @@ namespace Junction
             // Take parameters from calling functions parameters
             int popsize = PopulationSize;
             double mutarate = MutationProbability;
-
+            
             if (seededRun)
             {
-                CGA.SeedPopulation(Genes, Times, Modes);
+                CGA.SeedPopulation(Genes, Times, Modes, NumberOfResources, mutarate);
             }
             //CGA.survivalSelection = survivalMode;
             //CGA.parentSelection = parentMode;

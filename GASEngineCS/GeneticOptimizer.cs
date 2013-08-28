@@ -65,35 +65,21 @@ namespace Junction
             static private SimpleRNG _srng;
             // Generic GA parameters:
             private int _seed;
-            private int _length;
-            private int _tl;
-            private int _mModes;
             private int _popsize;
             private int _offsize;
-            private double _mutationRate;
             private double _deathRate;
             // Genetic Operator Flags:
             public ParentSelectionOp parentSelection { get; set; }
             public RealCrossoverOp realCrossover { get; set; }
             public SurvivalSelectionOp survivalSelection { get; set; }
-            // Problem specific parameters:
-            private double _delayMean;
-            double _delayRate;
-            //double _delayVar;
             public GA(int seed, int length, int tl, int modes, int popsize, int offsize, double mutationRate, double deathRate, double delayRate, double delayMean)
             {
                 _seed = seed;
                 _rand = new Random(_seed);
                 _srng = new SimpleRNG((uint)_seed);
-                _length = length;
-                _tl = tl;
-                _mModes = modes;
                 _popsize = popsize;
                 _offsize = offsize;
-                _mutationRate = mutationRate;
                 _deathRate = deathRate;
-                _delayRate = delayRate;
-                _delayMean = delayMean;
                 population = new ScheduleGenome[_popsize];
                 offspring = new ScheduleGenome[_offsize];
                 // Default operator options:
@@ -101,22 +87,22 @@ namespace Junction
                 survivalSelection = SurvivalSelectionOp.Elitist;
                 parentSelection = ParentSelectionOp.Tournament;
 
-                elite = new ScheduleGenome(_length, tl, modes, mutationRate, delayRate, delayMean);
+                elite = new ScheduleGenome(length, tl, modes, mutationRate, delayRate, delayMean);
                 for (int i = 0; i < popsize; i++)
                 {
-                    population[i] = new ScheduleGenome(length, tl, modes, mutationRate, _delayRate, _delayMean);
+                    population[i] = new ScheduleGenome(length, tl, modes, mutationRate, delayRate, delayMean);
                     population[i].realCrossover = realCrossover;
                 }
                 for (int i = 0; i < offsize; i++)
                 {
-                    offspring[i] = new ScheduleGenome(length, tl, modes, mutationRate, _delayRate, _delayMean);
+                    offspring[i] = new ScheduleGenome(length, tl, modes, mutationRate, delayRate, delayMean);
                     offspring[i].realCrossover = realCrossover;
                 }
 
             }
-            public void SeedPopulation(int[] genes, double[] times, int[] modes)
+            public void SeedPopulation(int[] genes, double[] times, int[] modes, int mModes, double mutationRate)
             {
-                population[0] = new ScheduleGenome(_length, _tl, _mModes, _mutationRate, genes, times, modes);
+                population[0] = new ScheduleGenome(genes.Length, times.Length, mModes, mutationRate, genes, times, modes);
             }
             public double AverageFitness()
             {
