@@ -607,7 +607,8 @@ namespace Junction
 
         public void InitializeGA(int populationSize, int numberOfGenerations, double mutationRate, double replacementRate)
         {
-            CGA = new GeneticOptimizer.GA(randomSeed, NumberOfRealJobs, NumberOfRealJobs, NumberOfResources, populationSize, populationSize, mutationRate, replacementRate / 100.0, delayRate, meanDelayTime);
+            GeneticOptimizer.GA.ScheduleGenome exampleGenome = new GeneticOptimizer.GA.ScheduleGenome(NumberOfRealJobs, NumberOfRealJobs, NumberOfResources, mutationRate, delayRate, meanDelayTime);
+            CGA = new GeneticOptimizer.GA(randomSeed, populationSize, populationSize, replacementRate / 100.0, exampleGenome);
         }
 
         // This is the main method invoked to begin the scheduling process
@@ -685,9 +686,9 @@ namespace Junction
             }*/
             Debug.Write(Environment.NewLine + "Random Seed = " + randomSeed);
             // Create a data table with the best schedule
-            CreateScheduleDataTable(CGA.elite.Genes, CGA.elite.Times, CGA.elite.Modes);
+            CreateScheduleDataTable(CGA.elite.JobGenes, CGA.elite.TimeGenes, CGA.elite.ModeGenes);
             shouldBreak = true;
-            eliteFitness = CGA.FitnessFunction(CGA.elite.Genes, CGA.elite.Times, CGA.elite.Modes);
+            eliteFitness = CGA.FitnessFunction(CGA.elite.JobGenes, CGA.elite.TimeGenes, CGA.elite.ModeGenes);
             shouldBreak = false;
 
             return -1 * eliteFitness;
