@@ -607,8 +607,9 @@ namespace Junction
 
         public void InitializeGA(int populationSize, int numberOfGenerations, double mutationRate, double replacementRate)
         {
-            GeneticOptimizer.GA.ScheduleGenome exampleGenome = new GeneticOptimizer.GA.ScheduleGenome(NumberOfRealJobs, NumberOfRealJobs, NumberOfResources, mutationRate, delayRate, meanDelayTime);
-            CGA = new GeneticOptimizer.GA(randomSeed, populationSize, populationSize, replacementRate / 100.0, exampleGenome);
+            GeneticOptimizer.GA.ScheduleGenome exampleGenome = new GeneticOptimizer.GA.ScheduleGenome(NumberOfRealJobs, NumberOfRealJobs, NumberOfRealJobs, NumberOfResources, mutationRate, delayRate, meanDelayTime);
+            CGA = new GeneticOptimizer.GA(randomSeed, populationSize, populationSize, replacementRate / 100.0);
+            CGA.IntializePopulations(exampleGenome);
         }
 
         // This is the main method invoked to begin the scheduling process
