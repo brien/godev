@@ -62,7 +62,6 @@ namespace Junction
             private ScheduleGenome[] offspring;
             public ScheduleGenome elite;
             static private Random _rand;
-            static private SimpleRNG _srng;
             // Generic GA parameters:
             private int _seed;
             private int _popsize;
@@ -76,7 +75,7 @@ namespace Junction
             {
                 _seed = seed;
                 _rand = new Random(_seed);
-                _srng = new SimpleRNG((uint)_seed);
+                SimpleRNG.SetSeed((uint)_seed);
                 _popsize = popsize;
                 _offsize = offsize;
                 _deathRate = deathRate;
@@ -86,13 +85,12 @@ namespace Junction
                 realCrossover = RealCrossoverOp.MeanWithNoise;
                 survivalSelection = SurvivalSelectionOp.Elitist;
                 parentSelection = ParentSelectionOp.Tournament;
-
-
-
             }
             public void IntializePopulations(ScheduleGenome genomeDefinition)
             {
+                ScheduleGenome._rand = _rand;
                 elite = new ScheduleGenome(genomeDefinition);
+                elite.RandomInit();
                 for (int i = 0; i < _popsize; i++)
                 {
                     population[i] = new ScheduleGenome(elite);
@@ -122,10 +120,6 @@ namespace Junction
                 }
                 avg = avg / _popsize;
                 return avg;
-            }
-            public void GenRand()
-            {
-                population[0].GenRand(); //TestSimpleRNG.SimpleRNG.GetExponential();
             }
 
             // Copies best individual in population to elite.
@@ -340,337 +334,7 @@ namespace Junction
 
             }
 
-            public class ScheduleGenome
-            {
-                public int[] JobGenes;
-                public double[] TimeGenes;
-                public int[] ModeGenes;
 
-                public int _jobsLength;
-                public int _timesLength;
-                public int _modesLength;
-                public int _numberOfModes;
-                
-                private double _mutationRate;
-                public double _delayRate;
-                public double _delayMean;
-                public RealCrossoverOp realCrossover;
-
-                public double fitness;
-
-                // This constructor only allocates the gene arrays. Does not represent a valid solution.
-                public ScheduleGenome(int jobsLength, int timesLength, int modesLength, int numberOfModes, double mut, double delayRate, double delayMean)
-                {
-                    _mutationRate = mut;
-                    _delayRate = delayRate;
-                    _delayMean = delayMean;
-
-                    _jobsLength = jobsLength;
-                    _timesLength = timesLength;
-                    _modesLength = modesLength;
-                    _numberOfModes = numberOfModes;
-
-                    JobGenes = new int[jobsLength];
-                    TimeGenes = new double[timesLength];
-                    ModeGenes = new int[timesLength];
-
-                    for (int i = 0; i < _jobsLength; i++)
-                    {
-                        JobGenes[i] = 0;
-                    }
-                    for (int i = 0; i < _timesLength; i++)
-                    {
-                        TimeGenes[i] = 0;
-                    }
-                    for (int i = 0; i < _modesLength; i++)
-                    {
-                        ModeGenes[i] = 0;
-                    }
-                    fitness = -1;
- 
-                }
-
-
-                //fix this, it's a shallow copy
-                public ScheduleGenome(ScheduleGenome g)
-                {
-                    JobGenes = new int[g._jobsLength];
-                    TimeGenes = new double[g._timesLength];
-                    ModeGenes = new int[g._modesLength];
-                    _jobsLength = g._jobsLength;
-                    _timesLength = g._timesLength;
-                    _modesLength = g._modesLength;
-                    _numberOfModes = g._numberOfModes;
-                    _mutationRate = g._mutationRate;
-                    for (int i = 0; i < g._jobsLength; i++)
-                    {
-                        JobGenes[i] = g.JobGenes[i];
-                    }
-                    for (int i = 0; i < g._timesLength; i++)
-                    {
-                        TimeGenes[i] = g.TimeGenes[i];
-                    }
-                    for (int i = 0; i < g._modesLength; i++)
-                    {
-                        ModeGenes[i] = g.ModeGenes[i];
-                    }
-                    fitness = -1;
-                    /*
-                    Genes = g.Genes;
-                    Times = g.Times;
-                    Modes = g.Modes;
-                    maxModes = g.maxModes;
-                    _mutationRate = g._mutationRate;
-                    fitness = g.fitness;
-                    _timesLength = g._timesLength;
-                    _length = g._length;
-                    realCrossover = g.realCrossover;
-                     */
-                }
-
-                public ScheduleGenome(int jobsLength, int timesLength, int modesLength, int numberOfModes, double mut, int[] geneSeeds, double[] timeSeeds, int[] modeSeeds)
-                {
-                    JobGenes = new int[jobsLength];
-                    TimeGenes = new double[timesLength];
-                    ModeGenes = new int[timesLength];
-                    _jobsLength = jobsLength;
-
-                    _numberOfModes = numberOfModes;
-                    _modesLength = modesLength;
-                    _mutationRate = mut;
-                    for (int i = 0; i < jobsLength; i++)
-                    {
-                        JobGenes[i] = geneSeeds[i];
-                    }
-                    for (int i = 0; i < timesLength; i++)
-                    {
-                        TimeGenes[i] = timeSeeds[i];
-                    }
-                    for (int i = 0; i < modesLength; i++)
-                    {
-                        ModeGenes[i] = modeSeeds[i];
-                    }
-                    fitness = -1;
-                }
-                /*
-                public ScheduleGenome(int length, int tl, int mModes, double mut, double delayRate, double delayMean)
-                {
-                    JobGenes = new int[length];
-                    TimeGenes = new double[tl];
-                    ModeGenes = new int[tl];
-                    _numberOfModes = mModes;
-                    _jobsLength = length;
-                    _modesLength = tl;
-                    _mutationRate = mut;
-                    _delayRate = delayRate;
-                    _delayMean = delayMean;
-                    List<int> randarray = new List<int>();
-                    for (int i = 0; i < length; i++)
-                    {
-                        randarray.Add(i);
-                    }
-                    for (int i = 0; i < length; i++)
-                    {
-                        int r = _rand.Next(0, length - i);
-                        JobGenes[i] = randarray[r];
-                        randarray.RemoveAt(r);
-                    }
-                    fitness = -1;
-                    for (int i = 0; i < tl; i++)
-                    {
-                        if (_rand.NextDouble() < delayRate)
-                        {
-                            TimeGenes[i] = SimpleRNG.GetExponential(delayMean);
-                        }
-                        else
-                        {
-                            TimeGenes[i] = 0.0;
-                        }
-                        ModeGenes[i] = _rand.Next(_numberOfModes);
-                    }
-                }*/
-
-                public void RandomInit()
-                {
-                    List<int> randarray = new List<int>();
-                    for (int i = 0; i < _jobsLength; i++)
-                    {
-                        randarray.Add(i);
-                    }
-                    for (int i = 0; i < _jobsLength; i++)
-                    {
-                        int r = _rand.Next(0, _jobsLength - i);
-                        JobGenes[i] = randarray[r];
-                        randarray.RemoveAt(r);
-                    }
-                    for (int i = 0; i < _timesLength; i++)
-                    {
-                        if (_rand.NextDouble() < _delayRate)
-                        {
-                            TimeGenes[i] = SimpleRNG.GetExponential(_delayMean);
-                        }
-                        else
-                        {
-                            TimeGenes[i] = 0.0;
-                        }
-                        ModeGenes[i] = _rand.Next(_numberOfModes);
-                    }
-
-                    fitness = -1;
-
-                }
-
-                public void Copy(ScheduleGenome c)
-                {
-                    fitness = c.fitness;
-                    for (int i = 0; i < JobGenes.Length; i++)
-                    {
-                        JobGenes[i] = c.JobGenes[i];
-                        if (i < _modesLength)
-                        {
-                            TimeGenes[i] = c.TimeGenes[i];
-                            ModeGenes[i] = c.ModeGenes[i];
-                        }
-                    }
-                }
-
-                public double Distance(ScheduleGenome c)
-                {
-                    double d = 0;
-                    for (int i = 0; i < _modesLength; i++)
-                    {
-                        d += Math.Pow(TimeGenes[i] - c.TimeGenes[i], 2.0);
-                    }
-                    return Math.Sqrt(d);
-                }
-
-                public void GenRand()
-                {
-                    Debug.Write(Environment.NewLine + _rand.Next(JobGenes.Length));
-                }
-                public void DTCrossover(ref ScheduleGenome p2, ref ScheduleGenome o1) //out ScheduleGenome o2)
-                {
-                    switch (realCrossover)
-                    {
-                        case RealCrossoverOp.MeanWithNoise:
-                            // Mean-with-noise Crossover:
-                            for (int i = 0; i < _modesLength; i++)
-                            {
-                                double mean = TimeGenes[i] + p2.TimeGenes[i];
-                                mean = mean / 2.0;
-                                o1.TimeGenes[i] = SimpleRNG.GetNormal(mean, 0.5);
-                                if (o1.TimeGenes[i] < 0.0)
-                                {
-                                    o1.TimeGenes[i] = 0.0;
-                                }
-                            }
-                            break;
-                        case RealCrossoverOp.Uniform:
-                            // Uniform Crossover:
-                            int cutpoint = _rand.Next(_modesLength + 1);
-                            for (int i = 0; i < cutpoint; i++)
-                            {
-                                o1.TimeGenes[i] = TimeGenes[i];
-                            }
-                            for (int i = cutpoint; i < _modesLength; i++)
-                            {
-                                o1.TimeGenes[i] = p2.TimeGenes[i];
-                            }
-                            break;
-                    }
-                }
-
-                public void Crossover(ref ScheduleGenome p2, ref ScheduleGenome o1)
-                {
-                    int cutpoint = _rand.Next(_jobsLength);
-
-                    //Debug.Write(Environment.NewLine + "Distance between " + p1 + " - " + p2 + ": " + population[p1].Distance(population[p2]));
-
-                    for (int i = 0; i < _jobsLength; i++)
-                    {
-                        o1.JobGenes[i] = JobGenes[i];
-                    }
-
-                    Debug.Assert(o1.IsValid(), "Invalid creature before crossover");
-
-                    List<int> remainder = new List<int>(p2.JobGenes);
-                    for (int i = 0; i < cutpoint; i++)
-                    {
-                        remainder.Remove(JobGenes[i]);
-                    }
-                    for (int i = cutpoint; i < _jobsLength; i++)
-                    {
-                        o1.JobGenes[i] = remainder[i - cutpoint];
-                    }
-
-                    Debug.Assert(o1.IsValid(), "Invalid creature after crossover");
-
-                    DTCrossover(ref p2, ref o1);
-                    CombinationCrossover(ref p2, ref o1);
-                }
-                public void CombinationCrossover(ref ScheduleGenome p2, ref ScheduleGenome o1)
-                {
-                    int cutpoint = _rand.Next(_modesLength);
-
-                    for (int i = 0; i < cutpoint; i++)
-                    {
-                        o1.ModeGenes[i] = p2.ModeGenes[i];
-                    }
-                    for (int i = cutpoint; i < _modesLength; i++)
-                    {
-                        o1.ModeGenes[i] = ModeGenes[i];
-                    }
-                }
-                public void Mutate()
-                {
-                    for (int i = 0; i < _jobsLength; i++)
-                    {
-                        if (_rand.NextDouble() < _mutationRate)
-                        {
-                            int r = _rand.Next(_jobsLength);
-                            int temp = JobGenes[i];
-                            JobGenes[i] = JobGenes[r];
-                            JobGenes[r] = temp;
-                            // Mutate the delay time
-                            r = _rand.Next(_modesLength);
-                            double mutatedDelay = 0;
-                            //mutatedDelay = SimpleRNG.GetExponential(_delayMean);
-                            mutatedDelay = SimpleRNG.GetNormal(TimeGenes[r], 1.0);
-                            //mutatedDelay = _rand.NextDouble() * _delayMean;
-                            if (mutatedDelay < 0.0)
-                            {
-                                mutatedDelay = 0.0;
-                            }
-                            TimeGenes[r] = mutatedDelay;
-                        }
-                    }
-                    //Mutate the Mode vector:
-                    for (int i = 0; i < _modesLength; i++)
-                    {
-                        if (_rand.NextDouble() < _mutationRate)
-                        {
-                            ModeGenes[i] = _rand.Next(_numberOfModes);
-                        }
-                    }
-
-                }
-                public bool IsValid()
-                {
-                    List<int> vals = new List<int>();
-                    bool r = true;
-                    foreach (int i in JobGenes)
-                    {
-                        if (vals.Contains(i))
-                        {
-                            r = false;
-                            break;
-                        }
-                        vals.Add(i);
-                    }
-                    return r;
-                }
-
-            }
 
             public sealed class NewComp : IComparer<ScheduleGenome>
             {
@@ -678,6 +342,289 @@ namespace Junction
                 {
                     return (y.fitness.CompareTo(x.fitness));
                 }
+            }
+
+        }
+
+        public class ScheduleGenome
+        {
+            public static Random _rand;
+
+            public int[] JobGenes;
+            public double[] TimeGenes;
+            public int[] ModeGenes;
+
+            public int _jobsLength;
+            public int _timesLength;
+            public int _modesLength;
+            public int _numberOfModes;
+
+            private double _mutationRate;
+            public double _delayRate;
+            public double _delayMean;
+            public RealCrossoverOp realCrossover;
+
+            public double fitness;
+
+            // This constructor only allocates the gene arrays. Does not represent a valid solution.
+            public ScheduleGenome(int jobsLength, int timesLength, int modesLength, int numberOfModes, double mut, double delayRate, double delayMean)
+            {
+                _mutationRate = mut;
+                _delayRate = delayRate;
+                _delayMean = delayMean;
+
+                _jobsLength = jobsLength;
+                _timesLength = timesLength;
+                _modesLength = modesLength;
+                _numberOfModes = numberOfModes;
+
+                JobGenes = new int[jobsLength];
+                TimeGenes = new double[timesLength];
+                ModeGenes = new int[timesLength];
+
+                for (int i = 0; i < _jobsLength; i++)
+                {
+                    JobGenes[i] = 0;
+                }
+                for (int i = 0; i < _timesLength; i++)
+                {
+                    TimeGenes[i] = 0;
+                }
+                for (int i = 0; i < _modesLength; i++)
+                {
+                    ModeGenes[i] = 0;
+                }
+                fitness = -1;
+
+            }
+
+            public ScheduleGenome(ScheduleGenome g)
+            {
+                JobGenes = new int[g._jobsLength];
+                TimeGenes = new double[g._timesLength];
+                ModeGenes = new int[g._modesLength];
+
+                _jobsLength = g._jobsLength;
+                _timesLength = g._timesLength;
+                _modesLength = g._modesLength;
+                _numberOfModes = g._numberOfModes;
+                _mutationRate = g._mutationRate;
+                for (int i = 0; i < g._jobsLength; i++)
+                {
+                    JobGenes[i] = g.JobGenes[i];
+                }
+                for (int i = 0; i < g._timesLength; i++)
+                {
+                    TimeGenes[i] = g.TimeGenes[i];
+                }
+                for (int i = 0; i < g._modesLength; i++)
+                {
+                    ModeGenes[i] = g.ModeGenes[i];
+                }
+                fitness = -1;
+            }
+
+            public ScheduleGenome(int jobsLength, int timesLength, int modesLength, int numberOfModes, double mut, int[] geneSeeds, double[] timeSeeds, int[] modeSeeds)
+            {
+                JobGenes = new int[jobsLength];
+                TimeGenes = new double[timesLength];
+                ModeGenes = new int[timesLength];
+
+
+                _jobsLength = jobsLength;
+                _timesLength = timesLength;
+                _modesLength = modesLength;
+                _numberOfModes = numberOfModes;
+                _mutationRate = mut;
+                for (int i = 0; i < jobsLength; i++)
+                {
+                    JobGenes[i] = geneSeeds[i];
+                }
+                for (int i = 0; i < timesLength; i++)
+                {
+                    TimeGenes[i] = timeSeeds[i];
+                }
+                for (int i = 0; i < modesLength; i++)
+                {
+                    ModeGenes[i] = modeSeeds[i];
+                }
+                fitness = -1;
+            }
+
+            public void RandomInit()
+            {
+                List<int> randarray = new List<int>();
+                for (int i = 0; i < _jobsLength; i++)
+                {
+                    randarray.Add(i);
+                }
+                for (int i = 0; i < _jobsLength; i++)
+                {
+                    int r = _rand.Next(0, _jobsLength - i);
+                    JobGenes[i] = randarray[r];
+                    randarray.RemoveAt(r);
+                }
+                for (int i = 0; i < _timesLength; i++)
+                {
+                    if (_rand.NextDouble() < _delayRate)
+                    {
+                        TimeGenes[i] = SimpleRNG.GetExponential(_delayMean);
+                    }
+                    else
+                    {
+                        TimeGenes[i] = 0.0;
+                    }
+                    ModeGenes[i] = _rand.Next(_numberOfModes);
+                }
+
+                fitness = -1;
+
+            }
+
+            public void Copy(ScheduleGenome c)
+            {
+                fitness = c.fitness;
+                for (int i = 0; i < JobGenes.Length; i++)
+                {
+                    JobGenes[i] = c.JobGenes[i];
+                    if (i < _modesLength)
+                    {
+                        TimeGenes[i] = c.TimeGenes[i];
+                        ModeGenes[i] = c.ModeGenes[i];
+                    }
+                }
+            }
+
+            public double Distance(ScheduleGenome c)
+            {
+                double d = 0;
+                for (int i = 0; i < _modesLength; i++)
+                {
+                    d += Math.Pow(TimeGenes[i] - c.TimeGenes[i], 2.0);
+                }
+                return Math.Sqrt(d);
+            }
+
+            public void RealCrossover(ref ScheduleGenome p2, ref ScheduleGenome o1)
+            {
+                switch (realCrossover)
+                {
+                    case RealCrossoverOp.MeanWithNoise:
+                        // Mean-with-noise Crossover:
+                        for (int i = 0; i < _modesLength; i++)
+                        {
+                            double mean = TimeGenes[i] + p2.TimeGenes[i];
+                            mean = mean / 2.0;
+                            o1.TimeGenes[i] = SimpleRNG.GetNormal(mean, 0.5);
+                            if (o1.TimeGenes[i] < 0.0)
+                            {
+                                o1.TimeGenes[i] = 0.0;
+                            }
+                        }
+                        break;
+                    case RealCrossoverOp.Uniform:
+                        // Uniform Crossover:
+                        int cutpoint = _rand.Next(_modesLength + 1);
+                        for (int i = 0; i < cutpoint; i++)
+                        {
+                            o1.TimeGenes[i] = TimeGenes[i];
+                        }
+                        for (int i = cutpoint; i < _modesLength; i++)
+                        {
+                            o1.TimeGenes[i] = p2.TimeGenes[i];
+                        }
+                        break;
+                }
+            }
+
+            public void Crossover(ref ScheduleGenome p2, ref ScheduleGenome o1)
+            {
+                int cutpoint = _rand.Next(_jobsLength);
+
+                //Debug.Write(Environment.NewLine + "Distance between " + p1 + " - " + p2 + ": " + population[p1].Distance(population[p2]));
+
+                for (int i = 0; i < _jobsLength; i++)
+                {
+                    o1.JobGenes[i] = JobGenes[i];
+                }
+
+                Debug.Assert(o1.IsValid(), "Invalid creature before crossover");
+
+                List<int> remainder = new List<int>(p2.JobGenes);
+                for (int i = 0; i < cutpoint; i++)
+                {
+                    remainder.Remove(JobGenes[i]);
+                }
+                for (int i = cutpoint; i < _jobsLength; i++)
+                {
+                    o1.JobGenes[i] = remainder[i - cutpoint];
+                }
+
+                Debug.Assert(o1.IsValid(), "Invalid creature after crossover");
+
+                RealCrossover(ref p2, ref o1);
+                CombinationCrossover(ref p2, ref o1);
+            }
+            public void CombinationCrossover(ref ScheduleGenome p2, ref ScheduleGenome o1)
+            {
+                int cutpoint = _rand.Next(_modesLength);
+
+                for (int i = 0; i < cutpoint; i++)
+                {
+                    o1.ModeGenes[i] = p2.ModeGenes[i];
+                }
+                for (int i = cutpoint; i < _modesLength; i++)
+                {
+                    o1.ModeGenes[i] = ModeGenes[i];
+                }
+            }
+            public void Mutate()
+            {
+                for (int i = 0; i < _jobsLength; i++)
+                {
+                    if (_rand.NextDouble() < _mutationRate)
+                    {
+                        int r = _rand.Next(_jobsLength);
+                        int temp = JobGenes[i];
+                        JobGenes[i] = JobGenes[r];
+                        JobGenes[r] = temp;
+                        // Mutate the delay time
+                        r = _rand.Next(_modesLength);
+                        double mutatedDelay = 0;
+                        //mutatedDelay = SimpleRNG.GetExponential(_delayMean);
+                        mutatedDelay = SimpleRNG.GetNormal(TimeGenes[r], 1.0);
+                        //mutatedDelay = _rand.NextDouble() * _delayMean;
+                        if (mutatedDelay < 0.0)
+                        {
+                            mutatedDelay = 0.0;
+                        }
+                        TimeGenes[r] = mutatedDelay;
+                    }
+                }
+                //Mutate the Mode vector:
+                for (int i = 0; i < _modesLength; i++)
+                {
+                    if (_rand.NextDouble() < _mutationRate)
+                    {
+                        ModeGenes[i] = _rand.Next(_numberOfModes);
+                    }
+                }
+
+            }
+            public bool IsValid()
+            {
+                List<int> vals = new List<int>();
+                bool r = true;
+                foreach (int i in JobGenes)
+                {
+                    if (vals.Contains(i))
+                    {
+                        r = false;
+                        break;
+                    }
+                    vals.Add(i);
+                }
+                return r;
             }
 
         }
