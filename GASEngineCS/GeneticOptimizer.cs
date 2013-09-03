@@ -61,7 +61,7 @@ namespace Junction
             public ScheduleGenome[] population;
             private ScheduleGenome[] offspring;
             public ScheduleGenome elite;
-            static private Random _rand;
+            //static private Random _rand;
             // Generic GA parameters:
             private int _seed;
             private int _popsize;
@@ -74,7 +74,7 @@ namespace Junction
             public GA(int seed, int popsize, int offsize, double deathRate)
             {
                 _seed = seed;
-                _rand = new Random(_seed);
+                //_rand = new Random(_seed);
                 SimpleRNG.SetSeed((uint)_seed);
                 _popsize = popsize;
                 _offsize = offsize;
@@ -88,8 +88,9 @@ namespace Junction
             }
             public void IntializePopulations(ScheduleGenome genomeDefinition)
             {
-                ScheduleGenome._rand = _rand;
+                // ScheduleGenome._rand = _rand;
                 elite = new ScheduleGenome(genomeDefinition);
+                elite.realCrossover = realCrossover;
                 elite.RandomInit();
                 for (int i = 0; i < _popsize; i++)
                 {
@@ -231,7 +232,8 @@ namespace Junction
                         {
                             totalFitness += population[i].fitness;
                         }
-                        double r = _rand.NextDouble() * totalFitness;
+                        //double r = _rand.NextDouble() * totalFitness;
+                        double r = SimpleRNG.GetUniform() * totalFitness;
                         double runningTotal = population[p].fitness;
                         while (runningTotal > r)
                         {
@@ -241,11 +243,12 @@ namespace Junction
                         break;
                     case ParentSelectionOp.Tournament:
                         int k = _popsize / 10;
-                        p = _rand.Next(_popsize);
+                        //p = _rand.Next(_popsize);
+                        p = (int)(SimpleRNG.GetUniform() * _popsize);
                         double bestfitness = population[p].fitness;
                         for (int i = 0; i < k; i++)
                         {
-                            int px = _rand.Next(_popsize);
+                            int px = SimpleRNG.Next(0, _popsize);
                             if (population[px].fitness > bestfitness)
                             {
                                 bestfitness = population[px].fitness;
@@ -348,7 +351,6 @@ namespace Junction
 
         public class ScheduleGenome
         {
-            public static Random _rand;
 
             public int[] JobGenes;
             public double[] TimeGenes;
@@ -404,11 +406,17 @@ namespace Junction
                 TimeGenes = new double[g._timesLength];
                 ModeGenes = new int[g._modesLength];
 
+                _delayRate = g._delayRate;
+                _delayMean = g._delayMean;
+
                 _jobsLength = g._jobsLength;
                 _timesLength = g._timesLength;
                 _modesLength = g._modesLength;
                 _numberOfModes = g._numberOfModes;
                 _mutationRate = g._mutationRate;
+
+                realCrossover = g.realCrossover;
+
                 for (int i = 0; i < g._jobsLength; i++)
                 {
                     JobGenes[i] = g.JobGenes[i];
@@ -460,13 +468,13 @@ namespace Junction
                 }
                 for (int i = 0; i < _jobsLength; i++)
                 {
-                    int r = _rand.Next(0, _jobsLength - i);
+                    int r = SimpleRNG.Next(0, _jobsLength - i);
                     JobGenes[i] = randarray[r];
                     randarray.RemoveAt(r);
                 }
                 for (int i = 0; i < _timesLength; i++)
                 {
-                    if (_rand.NextDouble() < _delayRate)
+                    if (SimpleRNG.GetUniform() < _delayRate)
                     {
                         TimeGenes[i] = SimpleRNG.GetExponential(_delayMean);
                     }
@@ -474,7 +482,7 @@ namespace Junction
                     {
                         TimeGenes[i] = 0.0;
                     }
-                    ModeGenes[i] = _rand.Next(_numberOfModes);
+                    ModeGenes[i] = SimpleRNG.Next(0, _numberOfModes);
                 }
 
                 fitness = -1;
@@ -524,7 +532,7 @@ namespace Junction
                         break;
                     case RealCrossoverOp.Uniform:
                         // Uniform Crossover:
-                        int cutpoint = _rand.Next(_modesLength + 1);
+                        int cutpoint = SimpleRNG.Next(0, _modesLength + 1);
                         for (int i = 0; i < cutpoint; i++)
                         {
                             o1.TimeGenes[i] = TimeGenes[i];
@@ -539,7 +547,7 @@ namespace Junction
 
             public void Crossover(ref ScheduleGenome p2, ref ScheduleGenome o1)
             {
-                int cutpoint = _rand.Next(_jobsLength);
+                int cutpoint = SimpleRNG.Next(0, _jobsLength);
 
                 //Debug.Write(Environment.NewLine + "Distance between " + p1 + " - " + p2 + ": " + population[p1].Distance(population[p2]));
 
@@ -567,7 +575,7 @@ namespace Junction
             }
             public void CombinationCrossover(ref ScheduleGenome p2, ref ScheduleGenome o1)
             {
-                int cutpoint = _rand.Next(_modesLength);
+                int cutpoint = SimpleRNG.Next(0, _modesLength);
 
                 for (int i = 0; i < cutpoint; i++)
                 {
@@ -582,14 +590,14 @@ namespace Junction
             {
                 for (int i = 0; i < _jobsLength; i++)
                 {
-                    if (_rand.NextDouble() < _mutationRate)
+                    if (SimpleRNG.GetUniform() < _mutationRate)
                     {
-                        int r = _rand.Next(_jobsLength);
+                        int r = SimpleRNG.Next(0, _jobsLength);
                         int temp = JobGenes[i];
                         JobGenes[i] = JobGenes[r];
                         JobGenes[r] = temp;
                         // Mutate the delay time
-                        r = _rand.Next(_modesLength);
+                        r = SimpleRNG.Next(0, _modesLength);
                         double mutatedDelay = 0;
                         //mutatedDelay = SimpleRNG.GetExponential(_delayMean);
                         mutatedDelay = SimpleRNG.GetNormal(TimeGenes[r], 1.0);
@@ -604,9 +612,9 @@ namespace Junction
                 //Mutate the Mode vector:
                 for (int i = 0; i < _modesLength; i++)
                 {
-                    if (_rand.NextDouble() < _mutationRate)
+                    if (SimpleRNG.GetUniform() < _mutationRate)
                     {
-                        ModeGenes[i] = _rand.Next(_numberOfModes);
+                        ModeGenes[i] = SimpleRNG.Next(0, _numberOfModes);
                     }
                 }
 

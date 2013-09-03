@@ -618,7 +618,7 @@ namespace Junction
             // The new function only exists to support "demo" code.
             DateTime now = new DateTime();
             now = DateTime.Today;
-            if (now > DateTime.Parse("9/01/2013"))
+            if (now > DateTime.Parse("10/01/2013"))
             {
                 throw new ApplicationException("***** Time limit for this demo version is exceeded.******\n\r Please contact Junction Solutions to obtain an updated and licensed version.\n\r");
             }
@@ -641,6 +641,7 @@ namespace Junction
             // Take parameters from calling functions parameters
             int popsize = PopulationSize;
             double mutarate = MutationProbability;
+            SimpleRNG.SetSeed((uint)randomSeed, (uint)randomSeed*2);
             
             if (seededRun)
             {
