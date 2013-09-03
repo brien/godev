@@ -607,7 +607,9 @@ namespace Junction
 
         public void InitializeGA(int populationSize, int numberOfGenerations, double mutationRate, double replacementRate)
         {
-            CGA = new GeneticOptimizer.GA(randomSeed, NumberOfRealJobs, NumberOfRealJobs, NumberOfResources, populationSize, populationSize, mutationRate, replacementRate / 100.0, delayRate, meanDelayTime);
+            GeneticOptimizer.ScheduleGenome exampleGenome = new GeneticOptimizer.ScheduleGenome(NumberOfRealJobs, NumberOfRealJobs, NumberOfRealJobs, NumberOfResources, mutationRate, delayRate, meanDelayTime);
+            CGA = new GeneticOptimizer.GA(randomSeed, populationSize, populationSize, replacementRate / 100.0);
+            CGA.IntializePopulations(exampleGenome);
         }
 
         // This is the main method invoked to begin the scheduling process
@@ -616,7 +618,7 @@ namespace Junction
             // The new function only exists to support "demo" code.
             DateTime now = new DateTime();
             now = DateTime.Today;
-            if (now > DateTime.Parse("9/01/2013"))
+            if (now > DateTime.Parse("10/01/2013"))
             {
                 throw new ApplicationException("***** Time limit for this demo version is exceeded.******\n\r Please contact Junction Solutions to obtain an updated and licensed version.\n\r");
             }
@@ -639,10 +641,11 @@ namespace Junction
             // Take parameters from calling functions parameters
             int popsize = PopulationSize;
             double mutarate = MutationProbability;
-
+            SimpleRNG.SetSeed((uint)randomSeed, (uint)randomSeed*2);
+            
             if (seededRun)
             {
-                CGA.SeedPopulation(Genes, Times, Modes);
+                CGA.SeedPopulation(Genes, Times, Modes, NumberOfResources, mutarate);
             }
             //CGA.survivalSelection = survivalMode;
             //CGA.parentSelection = parentMode;
@@ -685,9 +688,9 @@ namespace Junction
             }*/
             Debug.Write(Environment.NewLine + "Random Seed = " + randomSeed);
             // Create a data table with the best schedule
-            CreateScheduleDataTable(CGA.elite.Genes, CGA.elite.Times, CGA.elite.Modes);
+            CreateScheduleDataTable(CGA.elite.JobGenes, CGA.elite.TimeGenes, CGA.elite.ModeGenes);
             shouldBreak = true;
-            eliteFitness = CGA.FitnessFunction(CGA.elite.Genes, CGA.elite.Times, CGA.elite.Modes);
+            eliteFitness = CGA.FitnessFunction(CGA.elite.JobGenes, CGA.elite.TimeGenes, CGA.elite.ModeGenes);
             shouldBreak = false;
 
             return -1 * eliteFitness;
