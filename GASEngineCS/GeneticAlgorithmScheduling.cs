@@ -843,9 +843,9 @@ namespace Junction
             if (seededRun)
             {
                 int NumJobs = JobsToSchedule.GetUpperBound(0) + 1;
-                Genes = new int[NumJobs];
+                Genes = new int[NumberOfRealJobs];
                 Times = new double[NumberOfRealJobs];
-                Modes = new int[NumJobs];
+                Modes = new int[NumberOfRealJobs];
                 int i = 0;
                 foreach (DataRow dr in dt.Rows)
                 {

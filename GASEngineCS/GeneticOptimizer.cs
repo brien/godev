@@ -110,7 +110,7 @@ namespace Junction
             // todo: broken, fix.
             public void SeedPopulation(int[] genes, double[] times, int[] modes, int mModes, double mutationRate)
             {
-                //population[0] = new ScheduleGenome(genes.Length, times.Length, mModes, mutationRate, genes, times, modes);
+                population[0] = new ScheduleGenome(genes.Length, times.Length, modes.Length, mModes, mutationRate, genes, times, modes);
             }
             public double AverageFitness()
             {
