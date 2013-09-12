@@ -847,15 +847,23 @@ namespace Junction
                 Times = new double[NumberOfRealJobs];
                 Modes = new int[NumberOfRealJobs];
                 int i = 0;
-                foreach (DataRow dr in dt.Rows)
+                try
                 {
-                    Genes[i] = (int)(double)dr["Genes"];
-                    if (i < NumberOfRealJobs)
+                    foreach (DataRow dr in dt.Rows)
                     {
-                        Modes[i] = (int)(double)dr["Mode"];
-                        Times[i] = (double)dr["DelayTime"];
+                        Genes[i] = (int)(double)dr["Genes"];
+                        if (i < NumberOfRealJobs)
+                        {
+                            Modes[i] = (int)(double)dr["Mode"];
+                            Times[i] = (double)dr["DelayTime"];
+                        }
+                        i++;
                     }
-                    i++;
+                }
+                catch (Exception)
+                {
+                    ValidDataInput = false;
+                    throw new ApplicationException("Invalid Starting Schedule - May not match input data");
                 }
             }
         }
