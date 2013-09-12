@@ -34,23 +34,32 @@ namespace MainForm
             // Create a master data set with line, product, changeover, and order data in it.
             DataSet ds2 = new DataSet();
 
-            // Add the Production Line Master Data
-            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Resources");
-            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Products");
-            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Orders");
-            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Change Over");
-            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Change Over Penalties");
-            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "BOMItems");
-            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Inventory");
-
-            if (this.GAS.seededRun)
+            try
             {
-                // Add the pre-existing schedule 
-                AddExcelTableToMasterData(ref ds2, tbStartingScheduleName.Text, "Raw Genome");
-            }
+                // Add the Production Line Master Data
+                AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Resources");
+                AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Products");
+                AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Orders");
+                AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Change Over");
+                AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Change Over Penalties");
+                AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "BOMItems");
+                AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Inventory");
 
-            // Send the complete dataset to the scheduler
-            this.GAS.MasterData = ds2;
+                if (this.GAS.seededRun)
+                {
+                    // Add the pre-existing schedule 
+                    AddExcelTableToMasterData(ref ds2, tbStartingScheduleName.Text, "Raw Genome");
+                }
+
+                // Send the complete dataset to the scheduler
+                this.GAS.MasterData = ds2;
+            }
+            catch (Exception exp)
+            {
+                Cursor = Cursors.Default;
+                MessageBox.Show(exp.Message, "Problem", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
 
 
             // Initialize the properties
@@ -84,7 +93,7 @@ namespace MainForm
             }
             else if (rbElitist.Checked)
             {
-                this.GAS.CGA.survivalSelection= Junction.GeneticOptimizer.SurvivalSelectionOp.Elitist;
+                this.GAS.CGA.survivalSelection = Junction.GeneticOptimizer.SurvivalSelectionOp.Elitist;
             }
             else if (rbGenerational.Checked)
             {
@@ -110,6 +119,8 @@ namespace MainForm
             {
                 this.GAS.CGA.realCrossover = Junction.GeneticOptimizer.RealCrossoverOp.MeanWithNoise;
             }
+
+
             /*
             Catch exp As Exception
                 ' Will catch any error that we're not explicitly trapping.
@@ -131,7 +142,7 @@ namespace MainForm
 
             try
             {
-                lblResult.Text = String.Format("{0: #,###.00}", GAS.Schedule(mutationRate,numberOfGenerations, deathRate, populationSize));
+                lblResult.Text = String.Format("{0: #,###.00}", GAS.Schedule(mutationRate, numberOfGenerations, deathRate, populationSize));
             }
             catch (Exception ex)
             {
@@ -221,7 +232,7 @@ namespace MainForm
             openFileDialog1.Filter = "Excel 2007 Workbooks (*.xlsx)|*.xlsx|Excel 98-2005 Workbooks (*.xls)|*.xls";
             openFileDialog1.CheckFileExists = true;
             openFileDialog1.ShowReadOnly = true;
-            if( openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 tbStartingScheduleName.Text = openFileDialog1.FileName;
             }
