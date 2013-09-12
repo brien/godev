@@ -45,7 +45,7 @@ namespace MainForm
 
             if (this.GAS.seededRun)
             {
-                // Add the pre-existing schedule
+                // Add the pre-existing schedule 
                 AddExcelTableToMasterData(ref ds2, tbStartingScheduleName.Text, "Raw Genome");
             }
 
@@ -194,8 +194,6 @@ namespace MainForm
             {
                 //MsgBox("Error Selecting File", MsgBoxStyle.Exclamation);
             }
-            tbStartingScheduleName.Text = "";
-            this.GAS.seededRun = false;
         }
 
         private void dgvSchedule_Paint(object sender, PaintEventArgs e)
@@ -232,6 +230,22 @@ namespace MainForm
                 MessageBox.Show("Error Selecting File");
             }
             GAS.seededRun = true;
+        }
+
+        private void cbLoadSchedule_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbLoadSchedule.Checked == true)
+            {
+                this.GAS.seededRun = true;
+                tbStartingScheduleName.Enabled = true;
+                btnSelectStartingSchedule.Enabled = true;
+            }
+            else
+            {
+                this.GAS.seededRun = false;
+                tbStartingScheduleName.Enabled = false;
+                btnSelectStartingSchedule.Enabled = false;
+            }
         }
     }
 }

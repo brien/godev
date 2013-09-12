@@ -56,13 +56,14 @@
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSolve = new System.Windows.Forms.Button();
             this.tbStartingScheduleName = new System.Windows.Forms.TextBox();
-            this.Label29 = new System.Windows.Forms.Label();
             this.btnSelectStartingSchedule = new System.Windows.Forms.Button();
             this.btnSelectSpreadSheet = new System.Windows.Forms.Button();
             this.tbWorkBookName = new System.Windows.Forms.TextBox();
             this.Label18 = new System.Windows.Forms.Label();
             this.cbShowStatus = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tbRandomSeed = new System.Windows.Forms.TextBox();
             this.GroupBox10 = new System.Windows.Forms.GroupBox();
             this.rbMeanWithNoise = new System.Windows.Forms.RadioButton();
             this.rbUniform = new System.Windows.Forms.RadioButton();
@@ -119,8 +120,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dgvSchedule = new System.Windows.Forms.DataGridView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tbRandomSeed = new System.Windows.Forms.TextBox();
+            this.cbLoadSchedule = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GroupBox7.SuspendLayout();
@@ -412,9 +412,9 @@
             // 
             // GroupBox1
             // 
+            this.GroupBox1.Controls.Add(this.cbLoadSchedule);
             this.GroupBox1.Controls.Add(this.btnSolve);
             this.GroupBox1.Controls.Add(this.tbStartingScheduleName);
-            this.GroupBox1.Controls.Add(this.Label29);
             this.GroupBox1.Controls.Add(this.btnSelectStartingSchedule);
             this.GroupBox1.Controls.Add(this.btnSelectSpreadSheet);
             this.GroupBox1.Controls.Add(this.tbWorkBookName);
@@ -429,7 +429,7 @@
             // 
             // btnSolve
             // 
-            this.btnSolve.Location = new System.Drawing.Point(281, 138);
+            this.btnSolve.Location = new System.Drawing.Point(281, 133);
             this.btnSolve.Name = "btnSolve";
             this.btnSolve.Size = new System.Drawing.Size(75, 23);
             this.btnSolve.TabIndex = 2;
@@ -439,24 +439,17 @@
             // 
             // tbStartingScheduleName
             // 
-            this.tbStartingScheduleName.Location = new System.Drawing.Point(9, 85);
+            this.tbStartingScheduleName.Enabled = false;
+            this.tbStartingScheduleName.Location = new System.Drawing.Point(9, 91);
             this.tbStartingScheduleName.Name = "tbStartingScheduleName";
             this.tbStartingScheduleName.Size = new System.Drawing.Size(251, 20);
             this.tbStartingScheduleName.TabIndex = 20;
             // 
-            // Label29
-            // 
-            this.Label29.AutoSize = true;
-            this.Label29.Location = new System.Drawing.Point(6, 69);
-            this.Label29.Name = "Label29";
-            this.Label29.Size = new System.Drawing.Size(118, 13);
-            this.Label29.TabIndex = 21;
-            this.Label29.Text = "Load Starting Schedule";
-            // 
             // btnSelectStartingSchedule
             // 
             this.btnSelectStartingSchedule.AccessibleName = "";
-            this.btnSelectStartingSchedule.Location = new System.Drawing.Point(281, 83);
+            this.btnSelectStartingSchedule.Enabled = false;
+            this.btnSelectStartingSchedule.Location = new System.Drawing.Point(281, 89);
             this.btnSelectStartingSchedule.Name = "btnSelectStartingSchedule";
             this.btnSelectStartingSchedule.Size = new System.Drawing.Size(75, 23);
             this.btnSelectStartingSchedule.TabIndex = 19;
@@ -496,7 +489,7 @@
             this.cbShowStatus.AutoSize = true;
             this.cbShowStatus.Checked = true;
             this.cbShowStatus.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowStatus.Location = new System.Drawing.Point(9, 144);
+            this.cbShowStatus.Location = new System.Drawing.Point(9, 139);
             this.cbShowStatus.Name = "cbShowStatus";
             this.cbShowStatus.Size = new System.Drawing.Size(159, 17);
             this.cbShowStatus.TabIndex = 13;
@@ -529,6 +522,22 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Optimization Parameters";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(144, 300);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 13);
+            this.label4.TabIndex = 60;
+            this.label4.Text = "RNG Seed";
+            // 
+            // tbRandomSeed
+            // 
+            this.tbRandomSeed.Location = new System.Drawing.Point(147, 316);
+            this.tbRandomSeed.Name = "tbRandomSeed";
+            this.tbRandomSeed.Size = new System.Drawing.Size(100, 20);
+            this.tbRandomSeed.TabIndex = 59;
             // 
             // GroupBox10
             // 
@@ -1087,21 +1096,16 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // label4
+            // cbLoadSchedule
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(144, 300);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 13);
-            this.label4.TabIndex = 60;
-            this.label4.Text = "RNG Seed";
-            // 
-            // tbRandomSeed
-            // 
-            this.tbRandomSeed.Location = new System.Drawing.Point(147, 316);
-            this.tbRandomSeed.Name = "tbRandomSeed";
-            this.tbRandomSeed.Size = new System.Drawing.Size(100, 20);
-            this.tbRandomSeed.TabIndex = 59;
+            this.cbLoadSchedule.AutoSize = true;
+            this.cbLoadSchedule.Location = new System.Drawing.Point(9, 68);
+            this.cbLoadSchedule.Name = "cbLoadSchedule";
+            this.cbLoadSchedule.Size = new System.Drawing.Size(137, 17);
+            this.cbLoadSchedule.TabIndex = 22;
+            this.cbLoadSchedule.Text = "Load Starting Schedule";
+            this.cbLoadSchedule.UseVisualStyleBackColor = true;
+            this.cbLoadSchedule.CheckedChanged += new System.EventHandler(this.cbLoadSchedule_CheckedChanged);
             // 
             // MainForm
             // 
@@ -1152,7 +1156,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         internal System.Windows.Forms.GroupBox GroupBox1;
         internal System.Windows.Forms.TextBox tbStartingScheduleName;
-        internal System.Windows.Forms.Label Label29;
         internal System.Windows.Forms.Button btnSelectStartingSchedule;
         internal System.Windows.Forms.Button btnSelectSpreadSheet;
         internal System.Windows.Forms.TextBox tbWorkBookName;
@@ -1240,6 +1243,7 @@
         private System.Windows.Forms.Button btnOutputToExcel;
         internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.TextBox tbRandomSeed;
+        private System.Windows.Forms.CheckBox cbLoadSchedule;
     }
 }
 
