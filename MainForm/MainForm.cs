@@ -61,7 +61,6 @@ namespace MainForm
                 return;
             }
 
-
             // Initialize the properties
             this.GAS.ShowStatusWhileRunning = cbShowStatus.Checked;
             //.LateCost = CDbl(tbLateCost.Text) / 60;
@@ -119,17 +118,6 @@ namespace MainForm
             {
                 this.GAS.CGA.realCrossover = Junction.GeneticOptimizer.RealCrossoverOp.MeanWithNoise;
             }
-
-
-            /*
-            Catch exp As Exception
-                ' Will catch any error that we're not explicitly trapping.
-                Dim MessageText As String = " Problem with input spreadsheet. Run is terminating."
-                MessageBox.Show(exp.Message & MessageText, MessageText, MessageBoxButtons.OK, MessageBoxIcon.Stop)
-                Cursor = Cursors.Default
-                Exit Sub
-            End Try
-            */
 
 
             // *************************************************************
