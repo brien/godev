@@ -155,8 +155,7 @@ namespace MainForm
             // Display the timer
             lblSolveTime.Text = "";
             DateTime end = DateTime.UtcNow;
-            //ElapsedTime = DateAndTime.Timer - ElapsedTime;
-            lblSolveTime.Text = String.Format("{0: #,###.00}", (end - begin).Seconds + " Seconds");
+            lblSolveTime.Text = String.Format("{0:0.##}", end.Subtract(begin).TotalSeconds) + " seconds";
             lblChangeOverTime.Text = GAS.ChangeOverTime.ToString("#,###.00") + " Hours";
             lblLateJobsLine.Text = GAS.NumberOfResourceLateJobs.ToString();
             lblLateJobsService.Text = GAS.NumberOfServiceLateJobs.ToString();
