@@ -69,13 +69,13 @@ namespace MainForm
             Junction.GeneticAlgorithmSchedulingCS.ResourceNotFeasible = Convert.ToDouble(tbLineInfeasibility.Text);
             this.GAS.ResourcePref = Convert.ToDouble(tbLineAffinity.Text);
 
-            if (tbRandomSeed.Text != "")
+            if (tbRandomSeed.Text == "")
             {
-                this.GAS.randomSeed = Convert.ToInt32(tbRandomSeed.Text);
+                this.GAS.randomSeed = Environment.TickCount;
             }
             else
             {
-                this.GAS.randomSeed = Environment.TickCount;
+                this.GAS.randomSeed = Convert.ToInt32(tbRandomSeed.Text);
             }
 
             int populationSize = Convert.ToInt32(tbHerdSize.Text);
