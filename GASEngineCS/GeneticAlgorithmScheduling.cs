@@ -1299,11 +1299,12 @@ namespace Junction
 
                         //Used to encourage jobs to start as soon as possible
                         //Todo  Turn Early start facto into a configurable factor (by resorce?)
-                        //if (JobStartTime > ProdEndTime[NumberOfResources - 1])
-                        //{
-                        //EarlyStartFactor += JobStartTime;
-                        //}
-
+                        
+                        if (JobStartTime > ProdEndTime[NumberOfResources - 1])
+                        {
+                            EarlyStartFactor += JobStartTime;
+                        }
+                        
                         PreviousProd = JobsToSchedule[CurrentJob];
 
                         //Calculate Service Early Cost

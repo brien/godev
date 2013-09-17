@@ -6,6 +6,10 @@
 // a genetic algorithm for finding production schedules.
 //
 // History:
+// Version: 0.3
+// Date: 2013 9 17 11:08
+// Major bug fixes.
+// 
 // Version: 0.2
 // Date: 2013 8 22 17:08
 // After rebasing the project, rewriting parts in C# that were in VB,
