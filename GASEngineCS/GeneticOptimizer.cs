@@ -8,7 +8,7 @@
 // History:
 // Version: 0.3
 // Date: 2013 9 17 11:08
-// Major bug fixes.
+// Major bug fixes. Ready to be used in demonstrations.
 // 
 // Version: 0.2
 // Date: 2013 8 22 17:08
