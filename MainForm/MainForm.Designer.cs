@@ -54,6 +54,7 @@
             this.Label3 = new System.Windows.Forms.Label();
             this.lblResult = new System.Windows.Forms.Label();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbLoadSchedule = new System.Windows.Forms.CheckBox();
             this.btnSolve = new System.Windows.Forms.Button();
             this.tbStartingScheduleName = new System.Windows.Forms.TextBox();
             this.btnSelectStartingSchedule = new System.Windows.Forms.Button();
@@ -120,7 +121,6 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dgvSchedule = new System.Windows.Forms.DataGridView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.cbLoadSchedule = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GroupBox7.SuspendLayout();
@@ -426,6 +426,17 @@
             this.GroupBox1.TabIndex = 18;
             this.GroupBox1.TabStop = false;
             this.GroupBox1.Text = "Run Conditions";
+            // 
+            // cbLoadSchedule
+            // 
+            this.cbLoadSchedule.AutoSize = true;
+            this.cbLoadSchedule.Location = new System.Drawing.Point(9, 68);
+            this.cbLoadSchedule.Name = "cbLoadSchedule";
+            this.cbLoadSchedule.Size = new System.Drawing.Size(137, 17);
+            this.cbLoadSchedule.TabIndex = 22;
+            this.cbLoadSchedule.Text = "Load Starting Schedule";
+            this.cbLoadSchedule.UseVisualStyleBackColor = true;
+            this.cbLoadSchedule.CheckedChanged += new System.EventHandler(this.cbLoadSchedule_CheckedChanged);
             // 
             // btnSolve
             // 
@@ -805,7 +816,7 @@
             this.tbComponentShortagePenalty.Name = "tbComponentShortagePenalty";
             this.tbComponentShortagePenalty.Size = new System.Drawing.Size(100, 20);
             this.tbComponentShortagePenalty.TabIndex = 43;
-            this.tbComponentShortagePenalty.Text = "300";
+            this.tbComponentShortagePenalty.Text = "1000";
             // 
             // GroupBox5
             // 
@@ -1095,17 +1106,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // cbLoadSchedule
-            // 
-            this.cbLoadSchedule.AutoSize = true;
-            this.cbLoadSchedule.Location = new System.Drawing.Point(9, 68);
-            this.cbLoadSchedule.Name = "cbLoadSchedule";
-            this.cbLoadSchedule.Size = new System.Drawing.Size(137, 17);
-            this.cbLoadSchedule.TabIndex = 22;
-            this.cbLoadSchedule.Text = "Load Starting Schedule";
-            this.cbLoadSchedule.UseVisualStyleBackColor = true;
-            this.cbLoadSchedule.CheckedChanged += new System.EventHandler(this.cbLoadSchedule_CheckedChanged);
             // 
             // MainForm
             // 
