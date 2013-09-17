@@ -37,11 +37,10 @@ namespace Junction
 
         // The mean of the delay times:
         public double meanDelayTime;
-        // The rate at which delay times are generated (probablilty of non-zero delay time)
+        // The rate at which delay times are generated (probablilty of non-zero delay time):
         public double delayRate;
-        public Junction.GeneticOptimizer.SurvivalSelectionOp survivalMode;
-        public Junction.GeneticOptimizer.RealCrossoverOp realCrossoverMode;
-        public Junction.GeneticOptimizer.ParentSelectionOp parentMode;
+        // The number used to seed the random number generator:
+        public int randomSeed;
         // Just for debugging purposes:
         static bool shouldBreak = false;
 
@@ -218,165 +217,45 @@ namespace Junction
             }
         }
 
+        private void AddDataColumnToTable(DataTable dt, Type type, string colName)
+        {
+            // Create a new data column, set the type and name, and add it to the table
+            DataColumn dc = new DataColumn();
+            dc.DataType = type;
+            dc.ColumnName = colName;
+            dc.ReadOnly = true;
+            dc.AutoIncrement = false;
+            dt.Columns.Add(dc);
+        }
+
         private void CreateScheduleDataTable(int[] genes, double[] delayTimes, int[] modes)
         {
             DataTable dt = new DataTable();
             DataRow dr;
 
-            //create a new data column, set the type and name, and add it to the table
-            DataColumn dc = new DataColumn();
-            dc.DataType = Type.GetType("System.Int32");
-            dc.ColumnName = "Sequence Number";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = Type.GetType("System.Int32");
-            dc.ColumnName = "Job Number";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = Type.GetType("System.Int32");
-            dc.ColumnName = "Product Index";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn("Product Number", System.Type.GetType("System.String"));
-            //dc.DataType = System.Type.GetType("System.String");
-            //dc.ColumnName = "Product Number";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = System.Type.GetType("System.String");
-            dc.ColumnName = "Product Name";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = Type.GetType("System.DateTime");
-            dc.ColumnName = "Early Start";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = System.Type.GetType("System.Double");
-            dc.ColumnName = "Setup Time";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = Type.GetType("System.DateTime");
-            dc.ColumnName = "Start Time";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = System.Type.GetType("System.Double");
-            dc.ColumnName = "Run Time";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = Type.GetType("System.DateTime");
-            dc.ColumnName = "End Time";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = Type.GetType("System.DateTime");
-            dc.ColumnName = "Time Due";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = Type.GetType("System.Double");
-            dc.ColumnName = "Order Quantity";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn(); //,,System.Data.DataColumn.Expression 
-            dc.DataType = Type.GetType("System.Int32");
-            dc.ColumnName = "Resource Number";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = System.Type.GetType("System.String");
-            dc.ColumnName = "Resource Name";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = System.Type.GetType("System.String");
-            dc.ColumnName = "Production Order";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = System.Type.GetType("System.String");
-            dc.ColumnName = "Allergens";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = System.Type.GetType("System.String");
-            dc.ColumnName = "Allergen Alert";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = System.Type.GetType("System.Boolean");
-            dc.ColumnName = "Resource Late";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = System.Type.GetType("System.Boolean");
-            dc.ColumnName = "Service Late";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = System.Type.GetType("System.Boolean");
-            dc.ColumnName = "Early Violation";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = System.Type.GetType("System.Boolean");
-            dc.ColumnName = "Resource Feasibility";
-            dc.ReadOnly = true;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
-
-            dc = new DataColumn();
-            dc.DataType = System.Type.GetType("System.Boolean");
-            dc.ColumnName = "BOM Violation";
-            dc.ReadOnly = false;
-            dc.AutoIncrement = false;
-            dt.Columns.Add(dc);
+            AddDataColumnToTable(dt, Type.GetType("System.Int32"), "Sequence Number");
+            AddDataColumnToTable(dt, Type.GetType("System.Int32"), "Job Number");
+            AddDataColumnToTable(dt, Type.GetType("System.Int32"), "Product Index");
+            AddDataColumnToTable(dt, Type.GetType("System.String"), "Product Number");
+            AddDataColumnToTable(dt, Type.GetType("System.String"), "Product Name");
+            AddDataColumnToTable(dt, Type.GetType("System.DateTime"), "Early Start");
+            AddDataColumnToTable(dt, Type.GetType("System.Double"), "Setup Time");
+            AddDataColumnToTable(dt, Type.GetType("System.DateTime"), "Start Time");
+            AddDataColumnToTable(dt, Type.GetType("System.Double"), "Run Time");
+            AddDataColumnToTable(dt, Type.GetType("System.DateTime"), "End Time");
+            AddDataColumnToTable(dt, Type.GetType("System.DateTime"), "Time Due");
+            AddDataColumnToTable(dt, Type.GetType("System.Double"), "Order Quantity");
+            AddDataColumnToTable(dt, Type.GetType("System.Int32"), "Resource Number");
+            AddDataColumnToTable(dt, Type.GetType("System.String"), "Resource Name");
+            AddDataColumnToTable(dt, Type.GetType("System.String"), "Production Order");
+            AddDataColumnToTable(dt, Type.GetType("System.String"), "Allergens");
+            AddDataColumnToTable(dt, Type.GetType("System.String"), "Allergen Alert");
+            AddDataColumnToTable(dt, Type.GetType("System.Boolean"), "Resource Late");
+            AddDataColumnToTable(dt, Type.GetType("System.Boolean"), "Service Late");
+            AddDataColumnToTable(dt, Type.GetType("System.Boolean"), "Early Violation");
+            AddDataColumnToTable(dt, Type.GetType("System.Boolean"), "Resource Feasibility");
+            AddDataColumnToTable(dt, Type.GetType("System.Boolean"), "BOM Violation");
+            dt.Columns["BOM Violation"].ReadOnly = false;
 
             DateTime d = DateTime.Today;
 
@@ -726,13 +605,20 @@ namespace Junction
             GAResult.Tables.Add(dt2);
         }
 
+        public void InitializeGA(int populationSize, int numberOfGenerations, double mutationRate, double replacementRate)
+        {
+            GeneticOptimizer.ScheduleGenome exampleGenome = new GeneticOptimizer.ScheduleGenome(NumberOfRealJobs, NumberOfRealJobs, NumberOfRealJobs, NumberOfResources, mutationRate, delayRate, meanDelayTime);
+            CGA = new GeneticOptimizer.GA(randomSeed, populationSize, populationSize, replacementRate / 100.0);
+            CGA.IntializePopulations(exampleGenome);
+        }
+
         // This is the main method invoked to begin the scheduling process
         public double Schedule(double MutationProbability, int NumberOfGenerations, double DeathRate, int PopulationSize)
         {
             // The new function only exists to support "demo" code.
             DateTime now = new DateTime();
             now = DateTime.Today;
-            if (now > DateTime.Parse("9/01/2013"))
+            if (now > DateTime.Parse("10/01/2013"))
             {
                 throw new ApplicationException("***** Time limit for this demo version is exceeded.******\n\r Please contact Junction Solutions to obtain an updated and licensed version.\n\r");
             }
@@ -742,9 +628,6 @@ namespace Junction
             FitnessArray = new double[PopulationSize];
             //bool Stopped = false; //Allow for interruption of a scheduling run
             IsFeasible = false;
-
-            int seed;
-            seed = Environment.TickCount;
 
             // display the status form
             StatusForm frmStatus = new StatusForm();
@@ -758,15 +641,15 @@ namespace Junction
             // Take parameters from calling functions parameters
             int popsize = PopulationSize;
             double mutarate = MutationProbability;
-
-            CGA = new GeneticOptimizer.GA(seed, NumberOfRealJobs, NumberOfRealJobs, NumberOfResources, popsize, popsize, mutarate, DeathRate / 100.0, delayRate, meanDelayTime);
+            SimpleRNG.SetSeed((uint)randomSeed, (uint)randomSeed*2);
+            
             if (seededRun)
             {
-                CGA.SeedPopulation(Genes, Times, Modes);
+                CGA.SeedPopulation(Genes, Times, Modes, NumberOfResources, mutarate);
             }
-            CGA.survivalSelection = survivalMode;
-            CGA.parentSelection = parentMode;
-            CGA.realCrossover = realCrossoverMode;
+            //CGA.survivalSelection = survivalMode;
+            //CGA.parentSelection = parentMode;
+            //CGA.realCrossover = realCrossoverMode;
             CGA.FitnessFunction = CalcFitness;
             CGA.EvaluatePopulation();
             for (int i = 0; i < NumberOfGenerations; i++)
@@ -803,11 +686,11 @@ namespace Junction
             {
                 Debug.Write(Environment.NewLine + CGA.elite.Genes[i] + "  " + CGA.elite.Times[i]);
             }*/
-            Debug.Write(Environment.NewLine + "Random Seed = " + seed);
+            Debug.Write(Environment.NewLine + "Random Seed = " + randomSeed);
             // Create a data table with the best schedule
-            CreateScheduleDataTable(CGA.elite.Genes, CGA.elite.Times, CGA.elite.Modes);
+            CreateScheduleDataTable(CGA.elite.JobGenes, CGA.elite.TimeGenes, CGA.elite.ModeGenes);
             shouldBreak = true;
-            eliteFitness = CGA.FitnessFunction(CGA.elite.Genes, CGA.elite.Times, CGA.elite.Modes);
+            eliteFitness = CGA.FitnessFunction(CGA.elite.JobGenes, CGA.elite.TimeGenes, CGA.elite.ModeGenes);
             shouldBreak = false;
 
             return -1 * eliteFitness;
@@ -960,19 +843,27 @@ namespace Junction
             if (seededRun)
             {
                 int NumJobs = JobsToSchedule.GetUpperBound(0) + 1;
-                Genes = new int[NumJobs];
+                Genes = new int[NumberOfRealJobs];
                 Times = new double[NumberOfRealJobs];
-                Modes = new int[NumJobs];
+                Modes = new int[NumberOfRealJobs];
                 int i = 0;
-                foreach (DataRow dr in dt.Rows)
+                try
                 {
-                    Genes[i] = (int)(double)dr["Genes"];
-                    if (i < NumberOfRealJobs)
+                    foreach (DataRow dr in dt.Rows)
                     {
-                        Modes[i] = (int)(double)dr["Mode"];
-                        Times[i] = (double)dr["DelayTime"];
+                        Genes[i] = (int)(double)dr["Genes"];
+                        if (i < NumberOfRealJobs)
+                        {
+                            Modes[i] = (int)(double)dr["Mode"];
+                            Times[i] = (double)dr["DelayTime"];
+                        }
+                        i++;
                     }
-                    i++;
+                }
+                catch (Exception)
+                {
+                    ValidDataInput = false;
+                    throw new ApplicationException("Invalid Starting Schedule - May not match input data");
                 }
             }
         }
@@ -1408,11 +1299,12 @@ namespace Junction
 
                         //Used to encourage jobs to start as soon as possible
                         //Todo  Turn Early start facto into a configurable factor (by resorce?)
-                        //if (JobStartTime > ProdEndTime[NumberOfResources - 1])
-                        //{
-                        //EarlyStartFactor += JobStartTime;
-                        //}
-
+                        
+                        if (JobStartTime > ProdEndTime[NumberOfResources - 1])
+                        {
+                            EarlyStartFactor += JobStartTime;
+                        }
+                        
                         PreviousProd = JobsToSchedule[CurrentJob];
 
                         //Calculate Service Early Cost

@@ -79,6 +79,11 @@ namespace TestSimpleRNG
             m_w = 18000 * (m_w & 65535) + (m_w >> 16);
             return (m_z << 16) + m_w;
         }
+
+        public static int Next(int min, int max)
+        {
+            return min + (int)(GetUniform() * (max - min));
+        }
         
         // Get normal (Gaussian) random sample with mean 0 and standard deviation 1
         public static double GetNormal()

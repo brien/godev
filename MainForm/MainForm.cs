@@ -26,12 +26,40 @@ namespace MainForm
 
         private void btnSolve_Click(object sender, EventArgs e)
         {
-            // this.GAS = new Junction.GeneticAlgorithmSchedulingCS();
             // Turn on the wait cursor
             Cursor = Cursors.WaitCursor;
-            // Dim EA As New Junction.ExcelAutomation
 
-            // Dim dr As DataRow
+            // The next section of code loads worksheets into multiple data tables within a single data set
+            // The dataset is then passed to the scheduler via the GAS.Masterdata Property.
+            // Create a master data set with line, product, changeover, and order data in it.
+            DataSet ds2 = new DataSet();
+
+            try
+            {
+                // Add the Production Line Master Data
+                AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Resources");
+                AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Products");
+                AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Orders");
+                AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Change Over");
+                AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Change Over Penalties");
+                AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "BOMItems");
+                AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Inventory");
+
+                if (this.GAS.seededRun)
+                {
+                    // Add the pre-existing schedule 
+                    AddExcelTableToMasterData(ref ds2, tbStartingScheduleName.Text, "Raw Genome");
+                }
+
+                // Send the complete dataset to the scheduler
+                this.GAS.MasterData = ds2;
+            }
+            catch (Exception exp)
+            {
+                Cursor = Cursors.Default;
+                MessageBox.Show(exp.Message, "Problem", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
 
             // Initialize the properties
             this.GAS.ShowStatusWhileRunning = cbShowStatus.Checked;
@@ -41,87 +69,68 @@ namespace MainForm
             Junction.GeneticAlgorithmSchedulingCS.ResourceNotFeasible = Convert.ToDouble(tbLineInfeasibility.Text);
             this.GAS.ResourcePref = Convert.ToDouble(tbLineAffinity.Text);
 
+            if (tbRandomSeed.Text == "")
+            {
+                this.GAS.randomSeed = Environment.TickCount;
+            }
+            else
+            {
+                this.GAS.randomSeed = Convert.ToInt32(tbRandomSeed.Text);
+            }
+
+            int populationSize = Convert.ToInt32(tbHerdSize.Text);
+            int numberOfGenerations = Convert.ToInt32(tbGenerations.Text);
+            double mutationRate = Convert.ToDouble(tbMutationProbability.Text);
+            double deathRate = Convert.ToDouble(tbDeathRate.Text);
+
             this.GAS.meanDelayTime = Convert.ToDouble(tbMeanDelay.Text);
             this.GAS.delayRate = Convert.ToDouble(tbDelayProb.Text);
+            this.GAS.InitializeGA(populationSize, numberOfGenerations, mutationRate, deathRate);
             if (rbStruggle.Checked)
             {
-                this.GAS.survivalMode = Junction.GeneticOptimizer.SurvivalSelectionOp.Struggle;
+                this.GAS.CGA.survivalSelection = Junction.GeneticOptimizer.SurvivalSelectionOp.Struggle;
             }
             else if (rbElitist.Checked)
             {
-                this.GAS.survivalMode = Junction.GeneticOptimizer.SurvivalSelectionOp.Elitist;
+                this.GAS.CGA.survivalSelection = Junction.GeneticOptimizer.SurvivalSelectionOp.Elitist;
             }
             else if (rbGenerational.Checked)
             {
-                this.GAS.survivalMode = Junction.GeneticOptimizer.SurvivalSelectionOp.Generational;
+                this.GAS.CGA.survivalSelection = Junction.GeneticOptimizer.SurvivalSelectionOp.Generational;
             }
             else if (rbReplaceWorst.Checked)
             {
-                this.GAS.survivalMode = Junction.GeneticOptimizer.SurvivalSelectionOp.ReplaceWorst;
+                this.GAS.CGA.survivalSelection = Junction.GeneticOptimizer.SurvivalSelectionOp.ReplaceWorst;
             }
             if (rbFitnessProportional.Checked)
             {
-                this.GAS.parentMode = Junction.GeneticOptimizer.ParentSelectionOp.FitnessProportional;
+                this.GAS.CGA.parentSelection = Junction.GeneticOptimizer.ParentSelectionOp.FitnessProportional;
             }
             else if (rbTournament.Checked)
             {
-                this.GAS.parentMode = Junction.GeneticOptimizer.ParentSelectionOp.Tournament;
+                this.GAS.CGA.parentSelection = Junction.GeneticOptimizer.ParentSelectionOp.Tournament;
             }
             if (rbUniform.Checked)
             {
-                this.GAS.realCrossoverMode = Junction.GeneticOptimizer.RealCrossoverOp.Uniform;
+                this.GAS.CGA.realCrossover = Junction.GeneticOptimizer.RealCrossoverOp.Uniform;
             }
             else if (rbMeanWithNoise.Checked)
             {
-                this.GAS.realCrossoverMode = Junction.GeneticOptimizer.RealCrossoverOp.MeanWithNoise;
+                this.GAS.CGA.realCrossover = Junction.GeneticOptimizer.RealCrossoverOp.MeanWithNoise;
             }
-            // The next section of code loads worksheets into multiple data tables within a single data set
-            // The dataset is then passed to the scheduler via the GAS.Masterdata Property.
-            // Create a master data set with line, product, changeover, and order data in it.
-            DataSet ds2 = new DataSet();
-
-            // Add the Production Line Master Data
-            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Resources");
-            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Products");
-            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Orders");
-            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Change Over");
-            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Change Over Penalties");
-            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "BOMItems");
-            AddExcelTableToMasterData(ref ds2, tbWorkBookName.Text, "Inventory");
-
-            if (this.GAS.seededRun)
-            {
-                // Add the pre-existing schedule
-                AddExcelTableToMasterData(ref ds2, tbStartingScheduleName.Text, "Raw Genome");
-            }
-
-            // Send the complete dataset to the scheduler
-            this.GAS.MasterData = ds2;
-
-            /*
-            Catch exp As Exception
-                ' Will catch any error that we're not explicitly trapping.
-                Dim MessageText As String = " Problem with input spreadsheet. Run is terminating."
-                MessageBox.Show(exp.Message & MessageText, MessageText, MessageBoxButtons.OK, MessageBoxIcon.Stop)
-                Cursor = Cursors.Default
-                Exit Sub
-            End Try
-            */
 
 
             // *************************************************************
             // Start the run
             // *************************************************************
             // Set up a timer
-            System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
-            stopwatch.Start();
+            DateTime begin = DateTime.UtcNow;
             // Display the results
             gbResults.Visible = true;
 
             try
             {
-                lblResult.Text = String.Format("{0: #,###.00}", GAS.Schedule(Convert.ToDouble(tbMutationProbability.Text), Convert.ToInt32(tbGenerations.Text)
-                                          , Convert.ToDouble(tbDeathRate.Text), Convert.ToInt32(tbHerdSize.Text)));
+                lblResult.Text = String.Format("{0: #,###.00}", GAS.Schedule(mutationRate, numberOfGenerations, deathRate, populationSize));
             }
             catch (Exception ex)
             {
@@ -133,9 +142,8 @@ namespace MainForm
 
             // Display the timer
             lblSolveTime.Text = "";
-            stopwatch.Stop();
-            //ElapsedTime = DateAndTime.Timer - ElapsedTime;
-            lblSolveTime.Text = String.Format("{0: #,###.00}", stopwatch.Elapsed.Seconds + " Seconds");
+            DateTime end = DateTime.UtcNow;
+            lblSolveTime.Text = String.Format("{0:0.##}", end.Subtract(begin).TotalSeconds) + " seconds";
             lblChangeOverTime.Text = GAS.ChangeOverTime.ToString("#,###.00") + " Hours";
             lblLateJobsLine.Text = GAS.NumberOfResourceLateJobs.ToString();
             lblLateJobsService.Text = GAS.NumberOfServiceLateJobs.ToString();
@@ -184,8 +192,6 @@ namespace MainForm
             {
                 //MsgBox("Error Selecting File", MsgBoxStyle.Exclamation);
             }
-            tbStartingScheduleName.Text = "";
-            this.GAS.seededRun = false;
         }
 
         private void dgvSchedule_Paint(object sender, PaintEventArgs e)
@@ -213,7 +219,7 @@ namespace MainForm
             openFileDialog1.Filter = "Excel 2007 Workbooks (*.xlsx)|*.xlsx|Excel 98-2005 Workbooks (*.xls)|*.xls";
             openFileDialog1.CheckFileExists = true;
             openFileDialog1.ShowReadOnly = true;
-            if( openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 tbStartingScheduleName.Text = openFileDialog1.FileName;
             }
@@ -222,6 +228,22 @@ namespace MainForm
                 MessageBox.Show("Error Selecting File");
             }
             GAS.seededRun = true;
+        }
+
+        private void cbLoadSchedule_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbLoadSchedule.Checked == true)
+            {
+                this.GAS.seededRun = true;
+                tbStartingScheduleName.Enabled = true;
+                btnSelectStartingSchedule.Enabled = true;
+            }
+            else
+            {
+                this.GAS.seededRun = false;
+                tbStartingScheduleName.Enabled = false;
+                btnSelectStartingSchedule.Enabled = false;
+            }
         }
     }
 }
