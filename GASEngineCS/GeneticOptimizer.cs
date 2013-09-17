@@ -61,7 +61,6 @@ namespace Junction
             public ScheduleGenome[] population;
             private ScheduleGenome[] offspring;
             public ScheduleGenome elite;
-            //static private Random _rand;
             // Generic GA parameters:
             private int _seed;
             private int _popsize;
@@ -74,8 +73,7 @@ namespace Junction
             public GA(int seed, int popsize, int offsize, double deathRate)
             {
                 _seed = seed;
-                //_rand = new Random(_seed);
-                SimpleRNG.SetSeed((uint)_seed);
+                SimpleRNG.SetSeed((uint)_seed, (uint)_seed + 1);
                 _popsize = popsize;
                 _offsize = offsize;
                 _deathRate = deathRate;
@@ -88,7 +86,6 @@ namespace Junction
             }
             public void IntializePopulations(ScheduleGenome genomeDefinition)
             {
-                // ScheduleGenome._rand = _rand;
                 elite = new ScheduleGenome(genomeDefinition);
                 elite.realCrossover = realCrossover;
                 elite.RandomInit();
