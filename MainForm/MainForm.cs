@@ -153,6 +153,7 @@ namespace MainForm
 
             lblTotalTime.Text = GAS.TotalTime.ToString("#,###.00") + " Hours";
             lblRunTime.Text = GAS.RunTime.ToString("#,###.00") + " Hours";
+            tbRandomSeedUsed.Text = GAS.randomSeed.ToString();
 
             // reset the cursor
             Cursor = Cursors.Default;

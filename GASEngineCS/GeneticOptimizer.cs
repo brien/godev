@@ -77,7 +77,7 @@ namespace Junction
             public GA(int seed, int popsize, int offsize, double deathRate)
             {
                 _seed = seed;
-                SimpleRNG.SetSeed((uint)_seed, (uint)_seed + 1);
+                SimpleRNG.SetSeed((uint)_seed, (uint)_seed);
                 _popsize = popsize;
                 _offsize = offsize;
                 _deathRate = deathRate;

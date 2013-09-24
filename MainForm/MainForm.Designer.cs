@@ -121,6 +121,8 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dgvSchedule = new System.Windows.Forms.DataGridView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label29 = new System.Windows.Forms.Label();
+            this.tbRandomSeedUsed = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GroupBox7.SuspendLayout();
@@ -293,6 +295,8 @@
             // 
             // gbResults
             // 
+            this.gbResults.Controls.Add(this.tbRandomSeedUsed);
+            this.gbResults.Controls.Add(this.label29);
             this.gbResults.Controls.Add(this.lblChangeOverTime);
             this.gbResults.Controls.Add(this.lblRunTime);
             this.gbResults.Controls.Add(this.Label22);
@@ -1107,6 +1111,26 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(7, 133);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(59, 13);
+            this.label29.TabIndex = 39;
+            this.label29.Text = "RNG Seed";
+            // 
+            // tbRandomSeedUsed
+            // 
+            this.tbRandomSeedUsed.BackColor = System.Drawing.SystemColors.Window;
+            this.tbRandomSeedUsed.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbRandomSeedUsed.Location = new System.Drawing.Point(118, 133);
+            this.tbRandomSeedUsed.Name = "tbRandomSeedUsed";
+            this.tbRandomSeedUsed.ReadOnly = true;
+            this.tbRandomSeedUsed.Size = new System.Drawing.Size(55, 13);
+            this.tbRandomSeedUsed.TabIndex = 40;
+            this.tbRandomSeedUsed.Text = "Seed Value";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1244,6 +1268,8 @@
         internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.TextBox tbRandomSeed;
         private System.Windows.Forms.CheckBox cbLoadSchedule;
+        private System.Windows.Forms.TextBox tbRandomSeedUsed;
+        internal System.Windows.Forms.Label label29;
     }
 }
 

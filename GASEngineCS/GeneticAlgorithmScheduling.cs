@@ -641,7 +641,6 @@ namespace Junction
             // Take parameters from calling functions parameters
             int popsize = PopulationSize;
             double mutarate = MutationProbability;
-            SimpleRNG.SetSeed((uint)randomSeed, (uint)randomSeed*2);
             
             if (seededRun)
             {
