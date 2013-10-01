@@ -615,14 +615,6 @@ namespace Junction
         // This is the main method invoked to begin the scheduling process
         public double Schedule(double MutationProbability, int NumberOfGenerations, double DeathRate, int PopulationSize)
         {
-            // The new function only exists to support "demo" code.
-            DateTime now = new DateTime();
-            now = DateTime.Today;
-            if (now > DateTime.Parse("10/01/2013"))
-            {
-                throw new ApplicationException("***** Time limit for this demo version is exceeded.******\n\r Please contact Junction Solutions to obtain an updated and licensed version.\n\r");
-            }
-
             int NumJobs = JobsToSchedule.GetUpperBound(0) + 1;
             ScheduleResult = new object[7, NumJobs];
             FitnessArray = new double[PopulationSize];
